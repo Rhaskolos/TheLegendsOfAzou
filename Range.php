@@ -1,15 +1,14 @@
 <?php
 
-require_once "./Personnages.php";
-
-class Range extends Personnages {
+class Range extends Character {
 
     public function __construct($name)
     {
-    
-        parent::__construct($name, 1, 10, 6, 0, 5, 3);
+        parent::__construct($name);
+        $this->setPhysicalDamage(6);
+        $this->setMagicDamage(0);
+        $this->setPhysicalResistance(5);
+        $this->setMagicResistance(3);
     
     }
 }
-
-?>
