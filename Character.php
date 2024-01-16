@@ -1,30 +1,43 @@
 <?php
 
-abstract class Personnages {
+abstract class Character {
 
-    private string $name;
-    private int $level;
-    private int $vitality;
-    private int $physicalDamage;
-    private int $magicDamage;
-    private int $physicalResistance;
-    private int $magicResistance;
+    protected string $name;
+    protected int    $level;
+    protected int    $vitality;
+    protected int    $physicalDamage;
+    protected int    $magicDamage;
+    protected int    $physicalResistance;
+    protected int    $magicResistance;
 
 
-    public function __construct($name, $level, $vitality, $physicalDamage, $magicDamage, $physicalResistance, $magicResistance )
+    public function __construct(string $name)
     {
-        $this->name = $name;
-        $this->level = $level;
-        $this->vitality = $vitality;
-        $this->physicalDamage = $physicalDamage;
-        $this->magicDamage = $magicDamage;
-        $this->physicalResistance = $physicalResistance;
-        $this->magicResistance = $magicResistance;
+        $this->setName($name);
+        $this->setLevel(1);
+        $this->setVitality(10);
     }
 
+    public function move() {
+        $name = $this->getName();
+        echo ($name. " is moving\n");
+    }
+
+    public function attack() {
+        $name = $this->getName();    
+        echo ($name. " attacks the target\n");
+    }
+
+    public function attacked() {
+        $name = $this->getName();
+        echo ($name. " takes damage\n");
+    }
+
+    
     public function getName(): string {
         return $this->name;
     }
+    
 
     public function setName(string $name): void {
         $this->name = $name;
@@ -78,22 +91,6 @@ abstract class Personnages {
         $this->magicResistance = $magicResistance;
     }
 
-    public function move() {
-    $name = $this->getName();
-    echo ($name. " is moving\n");
-    }
-
-    public function attack() {
-    $name = $this->getName();    
-    echo ($name. " attacks the target\n");
-    }
-
-    public function attacked() {
-    $name = $this->getName();
-    echo ($name. " takes damage\n");
-    }
 
 }
 
-
-?>
