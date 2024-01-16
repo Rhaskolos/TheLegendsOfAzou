@@ -13,7 +13,7 @@ abstract class Character implements Moving {
     protected string $orientationCharacter;
     protected int    $positionXCharacter;
     protected int    $positionYCharacter;
-    private          $decor;
+    private          $table;
 
     public function __construct(string $name)
     {
@@ -28,8 +28,10 @@ abstract class Character implements Moving {
         $this->orientationCharacter = "right";
 
         // Vérifier si la nouvelle position contient un obstacle
-        if (!$this->decor->checkCollision($newX, $this->positionYCharacter)) {
+        if (!$this->table->isObstacleAtPosition($newX, $this->positionYCharacter) && $this->table->isValidPosition($newX, $this->positionYCharacter)) {
+            $this->table->cleanCase($this->positionXCharacter, $this->positionYCharacter);
             $this->positionXCharacter = $newX;
+            $this->table->initializeCharacterPosition($this);
             echo ($name. " is moving to right. ".$name." is looked at ". $this->orientationCharacter ."\n");
         } else {
             echo ($name. " is blocked by an obstacle and cannot move to the right. ".$name." is looked at ". $this->orientationCharacter ."\n");
@@ -42,8 +44,10 @@ abstract class Character implements Moving {
         $this->orientationCharacter = "left";
 
         // Vérifier si la nouvelle position contient un obstacle
-        if (!$this->decor->checkCollision($newX, $this->positionYCharacter)) {
+        if (!$this->table->isObstacleAtPosition($newX, $this->positionYCharacter) && $this->table->isValidPosition($newX, $this->positionYCharacter)) {
+            $this->table->cleanCase($this->positionXCharacter, $this->positionYCharacter);
             $this->positionXCharacter = $newX;
+            $this->table->initializeCharacterPosition($this);
             echo ($name. " is moving to left. ".$name." is looked at ". $this->orientationCharacter ."\n");
         } else {
             echo ($name. " is blocked by an obstacle and cannot move to the left. ".$name." is looked at ". $this->orientationCharacter ."\n");
@@ -56,8 +60,10 @@ abstract class Character implements Moving {
         $this->orientationCharacter = "up";
 
         // Vérifier si la nouvelle position contient un obstacle
-        if (!$this->decor->checkCollision($this->positionXCharacter, $newY)) {
+        if (!$this->table->isObstacleAtPosition($this->positionXCharacter, $newY) && $this->table->isValidPosition($this->positionXCharacter, $newY)) {
+            $this->table->cleanCase($this->positionXCharacter, $this->positionYCharacter);
             $this->positionYCharacter = $newY;
+            $this->table->initializeCharacterPosition($this);
             echo ($name. " is moving up. ".$name." is looked at ". $this->orientationCharacter ."\n");
         } else {
             echo ($name. " is blocked by an obstacle and cannot move up. ".$name." is looked at ". $this->orientationCharacter ."\n");
@@ -70,13 +76,17 @@ abstract class Character implements Moving {
         $this->orientationCharacter = "down";
 
         // Vérifier si la nouvelle position contient un obstacle
-        if (!$this->decor->checkCollision($this->positionXCharacter, $newY)) {
+        if (!$this->table->isObstacleAtPosition($this->positionXCharacter, $newY) && $this->table->isValidPosition($this->positionXCharacter, $newY)) {
+            $this->table->cleanCase($this->positionXCharacter, $this->positionYCharacter);
             $this->positionYCharacter = $newY;
+            $this->table->initializeCharacterPosition($this);
             echo ($name. " is moving down. ".$name." is looked at ". $this->orientationCharacter ."\n");
         } else {
             echo ($name. " is blocked by an obstacle and cannot move down. ".$name." is looked at ". $this->orientationCharacter ."\n");
         }
     }
+
+    
 
 
     public function attack() {
@@ -147,13 +157,6 @@ abstract class Character implements Moving {
         $this->magicResistance = $magicResistance;
     }
 
-    public function getDecor() {
-        return $this->decor;
-    }
-
-    public function setDecor(Decor $decor) {
-        $this->decor = $decor;
-    }
 
     public function getPositionXCharacter() {
         return $this->positionXCharacter;
@@ -169,6 +172,14 @@ abstract class Character implements Moving {
 
     public function setPositionYCharacter($positionY) {
         $this->positionYCharacter = $positionY;
+    }
+
+    public function getTable(){
+        return $this->table;
+    }
+
+    public function setTable(Table $table): void {
+        $this->table = $table;
     }
 
 }
