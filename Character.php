@@ -19,20 +19,21 @@ abstract class Character {
     }
 
     public function move() {
-    $name = $this->getName();
-    echo ($name. " is moving\n");
+        $name = $this->getName();
+        echo ($name. " is moving\n");
     }
 
     public function attack() {
-    $name = $this->getName();    
-    echo ($name. " attacks the target\n");
+        $name = $this->getName();    
+        echo ($name. " attacks the target\n");
     }
 
     public function attacked() {
-    $name = $this->getName();
-    echo ($name. " takes damage\n");
+        $name = $this->getName();
+        echo ($name. " takes damage\n");
     }
 
+    
     public function getName(): string {
         return $this->name;
     }
