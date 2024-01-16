@@ -24,8 +24,3 @@ interface Target
      */
     public function isAlive(): bool;
 }
-<<<<<<< HEAD
-=======
-
-?>
->>>>>>> 3f1842bb716d2c0d387d07c8f51f89bf24953f42
