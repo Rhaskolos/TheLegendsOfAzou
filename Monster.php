@@ -1,118 +1,163 @@
-<?php
+ <?php
 
 abstract class Monster {
 
-    private string $nameMonster;
-    private int $levelMonster;
-    private int $vitalityMonster;
-    private int $physicalDamageMonster;  
-    private int $physicalResistanceMonster;
-  
-public function __construct()
-{
-    $this->setNameMonster('Orque');
-    $this->setLevelMonster(5);
-    $this->setVitalityMonster(5);
-    $this->setPhysicalDamageMonster(4);
-    $this->setPhysicalResistanceMonster(2);
-}
+    private string $name;
+    private int $level;
+    private int $vitality;
+    private int $physicalDamage;
+    private int $magicDamage;
+    private int $physicalResistance;
+    private int $magicResistance;
+    
 
-    /**
-     * Get the value of nameMonster
-     */ 
-    public function getNameMonster()
+    public function __construct(string $name)
     {
-        return $this->nameMonster;
+        $this->setName($name);
+        $this->setLevel(3);
+        $this->setVitality(5); 
+        $this->setPhysicalDamage(1);
+        $this->setMagicDamage(2);  
+        $this->setPhysicalResistance(4);
+        $this->setMagicResistance(5);   
+    }
+    /**
+     * Get the value of name
+     */ 
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
-     * Set the value of nameMonster
+     * Set the value of name
      *
      * @return  self
      */ 
-    public function setNameMonster($nameMonster)
+    public function setName($name)
     {
-        $this->nameMonster = $nameMonster;
-
-        return $this;
-    }  
-
-    /**
-     * Get the value of levelMonster
-     */ 
-    public function getLevelMonster()
-    {
-        return $this->levelMonster;
-    }
-
-    /**
-     * Set the value of levelMonster
-     *
-     * @return  self
-     */ 
-    public function setLevelMonster($levelMonster)
-    {
-        $this->levelMonster = $levelMonster;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get the value of vitalityMonster
+     * Get the value of level
      */ 
-    public function getVitalityMonster()
+    public function getLevel()
     {
-        return $this->vitalityMonster;
+        return $this->level;
     }
 
     /**
-     * Set the value of vitalityMonster
+     * Set the value of level
      *
      * @return  self
      */ 
-    public function setVitalityMonster($vitalityMonster)
+    public function setLevel($level)
     {
-        $this->vitalityMonster = $vitalityMonster;
+        $this->level = $level;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of vitality
+     */ 
+    public function getVitality()
+    {
+        return $this->vitality;
+    }
+
+    /**
+     * Set the value of vitality
+     *
+     * @return  self
+     */ 
+    public function setVitality($vitality)
+    {
+        $this->vitality = $vitality;
 
         return $this;
     }
 
     /**
-     * Get the value of physicalDamageMonster
+     * Get the value of physicalDamage
      */ 
-    public function getPhysicalDamageMonster()
+    public function getPhysicalDamage()
     {
-        return $this->physicalDamageMonster;
+        return $this->physicalDamage;
     }
 
     /**
-     * Set the value of physicalDamageMonster
+     * Set the value of physicalDamage
      *
      * @return  self
      */ 
-    public function setPhysicalDamageMonster($physicalDamageMonster)
+    public function setPhysicalDamage($physicalDamage)
     {
-        $this->physicalDamageMonster = $physicalDamageMonster;
+        $this->physicalDamage = $physicalDamage;
 
         return $this;
     }
 
     /**
-     * Get the value of physicalResistanceMonster
+     * Get the value of magicDamage
      */ 
-    public function getPhysicalResistanceMonster()
+    public function getMagicDamage()
     {
-        return $this->physicalResistanceMonster;
+        return $this->magicDamage;
     }
 
     /**
-     * Set the value of physicalResistanceMonster
+     * Set the value of magicDamage
      *
      * @return  self
      */ 
-    public function setPhysicalResistanceMonster($physicalResistanceMonster)
+    public function setMagicDamage($magicDamage)
     {
-        $this->physicalResistanceMonster = $physicalResistanceMonster;
+        $this->magicDamage = $magicDamage;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of physicalResistance
+     */ 
+    public function getPhysicalResistance()
+    {
+        return $this->physicalResistance;
+    }
+
+    /**
+     * Set the value of physicalResistance
+     *
+     * @return  self
+     */ 
+    public function setPhysicalResistance($physicalResistance)
+    {
+        $this->physicalResistance = $physicalResistance;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of magicResistance
+     */ 
+    public function getMagicResistance()
+    {
+        return $this->magicResistance;
+    }
+
+    /**
+     * Set the value of magicResistance
+     *
+     * @return  self
+     */ 
+    public function setMagicResistance($magicResistance)
+    {
+        $this->magicResistance = $magicResistance;
 
         return $this;
     }
