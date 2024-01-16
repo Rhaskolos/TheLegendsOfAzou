@@ -14,12 +14,8 @@ abstract class Monster {
     public function __construct(string $name)
     {
         $this->setName($name);
-        $this->setLevel(3);
-        $this->setVitality(5); 
-        $this->setPhysicalDamage(1);
-        $this->setMagicDamage(2);  
-        $this->setPhysicalResistance(4);
-        $this->setMagicResistance(5);   
+        $this->setLevel(1); 
+        $this->setVitality(1);          
     }
     /**
      * Get the value of name
