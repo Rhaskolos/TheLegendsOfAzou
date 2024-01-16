@@ -31,7 +31,7 @@ class Table {
 
     public function isValidPosition($x, $y) {
         // Vérifier si la position est à l'intérieur de la grille
-        return isset($this->grid[$y]) && isset($this->grid[$y][$x]);
+        return (isset($this->grid[$x]) && isset($this->grid[$y]) && isset($this->grid[$y][$x]));
     }
 
     public function initializeCharacterPosition($character) {

@@ -10,7 +10,16 @@ require_once "./Table.php";
 
 
 $table = new Table (3,3);
+
+$table->displayTable();
+
+echo("\n");
+
 $table->addObstacle(0,2);
+
+$table->displayTable();
+
+echo("\n");
 
 $melee = new Melee("Azou",);
 $melee->setTable($table);
@@ -31,7 +40,14 @@ echo("\n");
 $melee->moveDown();
 
 $table->displayTable();
-
+echo("\n");
+$melee->moveRight();
+$melee->moveRight();
+$melee->moveDown();
+$table->displayTable();
+echo("\n");
+$table->addObstacle(1,2);
+$table->displayTable();
 
 
 
