@@ -1,5 +1,5 @@
 <?php
-interface IMoove
+interface IMove
 {
     /**
      * Déplace l'objet vers le haut.

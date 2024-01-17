@@ -1,5 +1,5 @@
 <?php
-interface Attack
+interface IAttack extends ITarget
 {
     /**
      * Exécute une attaque sur une cible donnée.
