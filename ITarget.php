@@ -1,5 +1,5 @@
 <?php
-interface Target
+interface ITarget
 {
     /**
      * Applique des dégâts à la cible.
