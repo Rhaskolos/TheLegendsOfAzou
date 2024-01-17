@@ -49,5 +49,9 @@ echo("\n");
 $table->addObstacle(1,2);
 $table->displayTable();
 
+$melee->movePattern("UULL");
 
-
+echo("\n");
+$table->displayTable();
+echo("\n");
+$melee->moveLeft();

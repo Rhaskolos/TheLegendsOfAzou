@@ -5,47 +5,51 @@ class Table {
 
     
 
+    //construct initialize an empty array
     public function __construct($sizeX, $sizeY) {
-        // Initialisation d'une grille vide
         $this->grid = array_fill(0, $sizeY, array_fill(0, $sizeX, false));
     }
 
+    
+    //Adding an obstacle at the specified position
     public function addObstacle($x, $y) {
-        // Ajout d'un obstacle à la position spécifiée
         if ($this->isValidPosition($x, $y)) {
             $this->grid[$y][$x] = true;
         }
     }
 
+    //clean the case by putting a zero in it
     public function cleanCase($x, $y) {
-        // Ajout d'un obstacle à la position spécifiée
         if ($this->isValidPosition($x, $y)) {
             $this->grid[$y][$x] = false;
         }
     }
 
+
+    //checks if a case contains an obstacle to validate or not a movement
     public function isObstacleAtPosition($x, $y) {
-        // Vérifier si la position contient un obstacle
         return $this->isValidPosition($x, $y) && $this->grid[$y][$x];
     }
 
+
+    //checks if position is inside grid
     public function isValidPosition($x, $y) {
-        // Vérifier si la position est à l'intérieur de la grille
         return (isset($this->grid[$x]) && isset($this->grid[$y]) && isset($this->grid[$y][$x]));
     }
 
+// initialize the starting position of the character
     public function initializeCharacterPosition($character) {
         $x = $character->getPositionXCharacter();
         $y = $character->getPositionYCharacter();
 
         if ($this->isValidPosition($x, $y)) {
-            // Réinitialiser la position du personnage sur la table
             $this->grid[$y][$x] = 'C';
         }
     }
 
+
+    //this method allows you to create a visualization of the table where zero are the empty locations, 1 the locations with obstacles and C the locations with Character
     public function displayTable() {
-        // Afficher chaque case de la table
         foreach ($this->grid as $row) {
             foreach ($row as $cell) {
                 echo ($cell === true ? '1' : ($cell === 'C' ? 'C' : '0')) . ' ';
@@ -54,12 +58,13 @@ class Table {
         }
     }
 
-     // Getter pour la propriété $grid
+
+     // Getters and Setters
      public function getGrid() {
         return $this->grid;
     }
 
-    // Setter pour la propriété $grid
+
     public function setGrid($grid) {
         $this->grid = $grid;
     }
