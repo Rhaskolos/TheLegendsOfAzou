@@ -27,7 +27,7 @@ class Picachun extends Monster {
 }
 
 }
-$picachun1 = new Picachun('Orque', 2, 1, 2, 2);
+$picachun1 = new Picachun('Orque', 1, 1, 2, 2);
 var_dump ($picachun1);
 
 
