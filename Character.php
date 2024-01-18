@@ -278,7 +278,7 @@ abstract class Character implements Moving
     {
         $this->magicalResistance = $magicalResistance;
     }
-}
+
 
 
     public function getPositionYCharacter()
