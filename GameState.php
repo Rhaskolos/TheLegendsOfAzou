@@ -22,7 +22,7 @@ class GameState {
   }
 
   public function getGameLoop(): GameLoop {
-    return $this->name;
+    return $this->gameLoop;
   }
 
   private function setGameLoop(GameLoop $gameLoop): self {

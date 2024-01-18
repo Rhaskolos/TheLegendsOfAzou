@@ -3,7 +3,7 @@
 class GameLoop {
 
   private GameState $state;
-  private boolean   $started;
+  private bool      $started;
   private array     $actions;
 
   public function __construct(GameState $state)
