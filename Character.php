@@ -1,14 +1,19 @@
 <?php
-abstract class Character {
+
+abstract class Character implements Moving
+{
 
     protected string $name;
-    protected int $level;
-    protected int $maxHealth;
-    protected int $currentHealth;
-    protected int $physicalDamage;
-    protected int $magicalDamage;
-    protected int $physicalResistance;
-    protected int $magicalResistance;
+    protected int    $level;
+    protected int    $vitality;
+    protected int    $physicalDamage;
+    protected int    $magicDamage;
+    protected int    $physicalResistance;
+    protected int    $magicResistance;
+    protected string $orientationCharacter;
+    protected int    $positionXCharacter;
+    protected int    $positionYCharacter;
+    private          $table;
 
     public function __construct(string $name)
     {
@@ -20,28 +25,165 @@ abstract class Character {
         $this->setMagicalResistance(0);
     }
 
-    public function move()
+
+    // Basic method for moving "Right/Left/Up/Down"
+
+    public function moveRight()
     {
-        $name = $this->getName();
-        echo "$name is moving\n";
+        $name = $this->name;
+        $newX = $this->positionXCharacter + 1;
+        $this->orientationCharacter = "right";
+
+        // checks if the new position is clean (need upgrate)
+        if (!$this->table->isObstacleAtPosition($newX, $this->positionYCharacter) && $this->table->isValidPosition($newX, $this->positionYCharacter)) {
+            $this->table->cleanCase($this->positionXCharacter, $this->positionYCharacter);
+            $this->positionXCharacter = $newX;
+            $this->table->initializeCharacterPosition($this);
+            echo ($name . " is moving to right. " . $name . " is looked at " . $this->orientationCharacter . "\n");
+        } else {
+            echo ($name . " is blocked by an obstacle and cannot move to the right. " . $name . " is looked at " . $this->orientationCharacter . "\n");
+        }
     }
 
+    public function moveLeft()
+    {
+        $name = $this->name;
+        $newX = $this->positionXCharacter - 1;
+        $this->orientationCharacter = "left";
+
+        // checks if the new position is clean (need upgrate)
+        if (!$this->table->isObstacleAtPosition($newX, $this->positionYCharacter) && $this->table->isValidPosition($newX, $this->positionYCharacter)) {
+            $this->table->cleanCase($this->positionXCharacter, $this->positionYCharacter);
+            $this->positionXCharacter = $newX;
+            $this->table->initializeCharacterPosition($this);
+            echo ($name . " is moving to left. " . $name . " is looked at " . $this->orientationCharacter . "\n");
+        } else {
+            echo ($name . " is blocked by an obstacle and cannot move to the left. " . $name . " is looked at " . $this->orientationCharacter . "\n");
+        }
+    }
+
+    public function moveUp()
+    {
+        $name = $this->name;
+        $newY = $this->positionYCharacter - 1;
+        $this->orientationCharacter = "up";
+
+        // checks if the new position is clean (need upgrate)
+        if (!$this->table->isObstacleAtPosition($this->positionXCharacter, $newY) && $this->table->isValidPosition($this->positionXCharacter, $newY)) {
+            $this->table->cleanCase($this->positionXCharacter, $this->positionYCharacter);
+            $this->positionYCharacter = $newY;
+            $this->table->initializeCharacterPosition($this);
+            echo ($name . " is moving up. " . $name . " is looked at " . $this->orientationCharacter . "\n");
+        } else {
+            echo ($name . " is blocked by an obstacle and cannot move up. " . $name . " is looked at " . $this->orientationCharacter . "\n");
+        }
+    }
+
+    public function moveDown()
+    {
+        $name = $this->name;
+        $newY = $this->positionYCharacter + 1;
+        $this->orientationCharacter = "down";
+
+        // checks if the new position is clean (need upgrate)
+        if (!$this->table->isObstacleAtPosition($this->positionXCharacter, $newY) && $this->table->isValidPosition($this->positionXCharacter, $newY)) {
+            $this->table->cleanCase($this->positionXCharacter, $this->positionYCharacter);
+            $this->positionYCharacter = $newY;
+            $this->table->initializeCharacterPosition($this);
+            echo ($name . " is moving down. " . $name . " is looked at " . $this->orientationCharacter . "\n");
+        } else {
+            echo ($name . " is blocked by an obstacle and cannot move down. " . $name . " is looked at " . $this->orientationCharacter . "\n");
+        }
+    }
+
+
+    // this method allows several movement indications to be given in a single instruction
+    public function movePattern(string $pattern)
+    {
+        foreach (str_split($pattern) as $movement) {
+            switch ($movement) {
+                case 'R':
+                    $this->moveRight();
+                    break;
+                case 'L':
+                    $this->moveLeft();
+                    break;
+                case 'U':
+                    $this->moveUp();
+                    break;
+                case 'D':
+                    $this->moveDown();
+                    break;
+                default:
+                
+                    break;
+            }
+        }
+    }
+
+    // this method allows you to define an infinite movement path for the unit
+    public function repeatMovePattern(string $pattern)
+    {
+        while (true) {
+            $this->movePattern($pattern);
+  
+            $pattern = $this->reverseMovePattern($pattern);
+        }
+    }
+
+    // essential method allowing the return path in the repeatMovePattern method
+    protected function reverseMovePattern(string $pattern)
+    {
+        $reversedPattern = "";
+        for ($i = 0; $i < strlen($pattern); $i++) {
+            $currentMove = $pattern[$i];
+            $inverseMove = $this->getInverseMove($currentMove);
+            $reversedPattern .= $inverseMove;
+        }
+        return $reversedPattern;
+    }
+
+
+    // allows writing the return path for the reverseMovePattern method
+    protected function getInverseMove($move)
+    {
+        switch ($move) {
+            case 'R':
+                return 'L';
+            case 'L':
+                return 'R';
+            case 'U':
+                return 'D';
+            case 'D':
+                return 'U';
+            default:
+                return $move; 
+        }
+    }
+
+    // minimal mehod for basic attack
     public function attack()
     {
         $name = $this->getName();
-        echo "$name attacks the target\n";
+        echo ($name . " attacks the target\n");
     }
 
-    public function attacked()
+    // minimal mehod for basic take damage  
+    public function takeDamage()
     {
         $name = $this->getName();
-        echo "$name takes damage\n";
+        echo ($name . " takes damage\n");
     }
 
+
+
+    // Getters and Setters
     public function getName(): string
     {
         return $this->name;
     }
+
+
 
     public function setName(string $name): void
     {
@@ -57,6 +199,7 @@ abstract class Character {
     {
         $this->level = $level;
     }
+
 
     public function getMaxHealth(): int
     {
@@ -93,6 +236,7 @@ abstract class Character {
         $target->setCurrentHealth($target->getCurrentHealth() - $damage);
     }
 
+
     public function getPhysicalDamage(): int
     {
         return $this->physicalDamage;
@@ -102,6 +246,7 @@ abstract class Character {
     {
         $this->physicalDamage = $physicalDamage;
     }
+
 
     public function getMagicalDamage(): int
     {
@@ -123,6 +268,7 @@ abstract class Character {
         $this->physicalResistance = $physicalResistance;
     }
 
+
     public function getMagicalResistance(): int
     {
         return $this->magicalResistance;
@@ -134,3 +280,24 @@ abstract class Character {
     }
 }
 
+
+    public function getPositionYCharacter()
+    {
+        return $this->positionYCharacter;
+    }
+
+    public function setPositionYCharacter($positionY)
+    {
+        $this->positionYCharacter = $positionY;
+    }
+
+    public function getTable()
+    {
+        return $this->table;
+    }
+
+    public function setTable(Table $table): void
+    {
+        $this->table = $table;
+    }
+}
