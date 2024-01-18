@@ -1,6 +1,5 @@
 <?php
 
-require_once "./Moving.php";
 abstract class Character implements Moving
 {
 
@@ -20,8 +19,12 @@ abstract class Character implements Moving
     {
         $this->setName($name);
         $this->setLevel(1);
-        $this->setVitality(10);
+        $this->setMaxHealth(10);
+        $this->setCurrentHealth($this->getMaxHealth());
+        $this->setPhysicalResistance(0);
+        $this->setMagicalResistance(0);
     }
+
 
     // Basic method for moving "Right/Left/Up/Down"
 
@@ -181,6 +184,7 @@ abstract class Character implements Moving
     }
 
 
+
     public function setName(string $name): void
     {
         $this->name = $name;
@@ -196,15 +200,42 @@ abstract class Character implements Moving
         $this->level = $level;
     }
 
-    public function getVitality(): int
+
+    public function getMaxHealth(): int
     {
-        return $this->vitality;
+        return $this->maxHealth;
     }
 
-    public function setVitality(int $vitality): void
+    public function setMaxHealth(int $health): void
     {
-        $this->vitality = $vitality;
+        $this->maxHealth = $health;
+        $this->setCurrentHealth($health);
     }
+
+    public function getCurrentHealth(): int
+    {
+        return $this->currentHealth;
+    }
+
+    public function setCurrentHealth(int $health): void
+    {
+        $this->currentHealth = min($health, $this->getMaxHealth());
+    }
+
+    public function dealPhysicalDamage(Character $target): void
+    {
+        $damage = $this->getPhysicalDamage() - $target->getPhysicalResistance();
+        $damage = max(0, $damage);
+        $target->setCurrentHealth($target->getCurrentHealth() - $damage);
+    }
+
+    public function dealMagicalDamage(Character $target): void
+    {
+        $damage = $this->getMagicalDamage() - $target->getMagicalResistance();
+        $damage = max(0, $damage);
+        $target->setCurrentHealth($target->getCurrentHealth() - $damage);
+    }
+
 
     public function getPhysicalDamage(): int
     {
@@ -216,14 +247,15 @@ abstract class Character implements Moving
         $this->physicalDamage = $physicalDamage;
     }
 
-    public function getMagicDamage(): int
+
+    public function getMagicalDamage(): int
     {
-        return $this->magicDamage;
+        return $this->magicalDamage;
     }
 
-    public function setMagicDamage(int $magicDamage): void
+    public function setMagicalDamage(int $magicalDamage): void
     {
-        $this->magicDamage = $magicDamage;
+        $this->magicalDamage = $magicalDamage;
     }
 
     public function getPhysicalResistance(): int
@@ -236,26 +268,18 @@ abstract class Character implements Moving
         $this->physicalResistance = $physicalResistance;
     }
 
-    public function getMagicResistance(): int
+
+    public function getMagicalResistance(): int
     {
-        return $this->magicResistance;
+        return $this->magicalResistance;
     }
 
-    public function setMagicResistance(int $magicResistance): void
+    public function setMagicalResistance(int $magicalResistance): void
     {
-        $this->magicResistance = $magicResistance;
+        $this->magicalResistance = $magicalResistance;
     }
+}
 
-
-    public function getPositionXCharacter()
-    {
-        return $this->positionXCharacter;
-    }
-
-    public function setPositionXCharacter($positionX)
-    {
-        $this->positionXCharacter = $positionX;
-    }
 
     public function getPositionYCharacter()
     {
