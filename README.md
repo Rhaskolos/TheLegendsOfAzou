@@ -1,4 +1,6 @@
+
 # READ ME (Main Branch)
+
 
 GameState
 
@@ -18,11 +20,13 @@ Elle ne possède qu’un seul paramètre (grid) qui est une matrice représentan
 
 Méthodes :
 
+
 Construct : La classe possède un construct qui permet d'instancier un nouveau tableau. En entrée, on donne X et Y qui correspondent à la largeur et hauteur du tableau. Lors de l’instanciation de l’objet, l'ensemble des cases de la matrice sont représentées par un 0 qui correspond à une case vide.
 
 isValidPosition : Méthode cœur de la classe permettant de définir si une case sélectionnée selon des coordonnées X et Y se trouve bien à l'intérieur du tableau instancié. retourne True ou False.
 
 addObstacle : Méthode permettant de rajouter un obstacle dans le tableau en mettant en entrée X et Y. La case comportant l’obstacle contiendra un 1 au lieu d’un 0. La méthode utilise aussi isValidPosition pour s’assurer que l’objet se trouve bien avec des coordonnées dans le tableau avant de l’instancier.
+
 
 isObstacleAtPosition : Méthode attendent en entrée X et Y permettant de vérifier si une case contient un obstacle ou non. Utilise aussi la méthode isValidPosition pour s’assurer que la case recherchée se trouve dans le tableau.
 
@@ -30,11 +34,13 @@ cleanCase : Méthode attendant en entrée X et Y et permettant de mettre un 0 en
 
 initializeCharacterPosition : Méthode attendant en entrée un objet de classe Character. La méthode récupère les coordonnées du character est le place sur la case selon les coordonnées. Il est représenté par un “C”. La méthode isValidPosition s’assure qu’on se trouve bien dans le tableau.
 
+
 displayTable : Cette méthode permet d’afficher dans la console l’ensemble des cases de la matrice. Les 0 représentent les cases vides, les 1 les obstacles et le C le Character.
 
 getGrid : Getter du paramètre “grid”
 
 setGrid : Setter du paramètre “grid”
+
 
 Classe Character :
 
@@ -43,6 +49,7 @@ Description :
 Classe abstrait servant de modèle pour les différentes classes jouables.
 
 Paramètres :
+
 
 Name : Correspond au nom donné au personnage jouable par le joueur.
 
@@ -65,6 +72,7 @@ positionXCharacter : correspond aux coordonnées X du Character dans le tableau.
 positionYCharacter : correspond aux coordonnées Y du Character dans le tableau.
 
 table : correspond au tableau dans lequel le Character est instancié.
+
 
 Méthodes :
 
@@ -89,5 +97,6 @@ reverseMovePattern : Méthode qui permet de créer une boucle infinie de déplac
 Travail en cours concernant le déplacement :
 
 Sortir les actions de déplacement de la class character pour en faire des classes action propres selon l’interface IGameAction.
+
 
 gestion des coordonnées selon l’interface et la classe position.
