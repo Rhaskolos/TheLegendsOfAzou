@@ -6,6 +6,5 @@ require_once('./Melee.php');
 require_once('./Range.php');
 require_once('./GameLoop.php');
 
-$gl = new GameLoop();
-
-$gl->start();
+// TODO: $gl = new GameLoop();
+// $gl->start();
