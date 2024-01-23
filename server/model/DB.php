@@ -40,7 +40,7 @@ class DB extends \PDO
     public static function getInstance()
     {
         if (!isset(static::$_instance)) {
-            static::$_instance = new Database();
+            static::$_instance = new DB();
         }
 
         return static::$_instance;
