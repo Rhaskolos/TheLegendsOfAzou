@@ -5,7 +5,6 @@ namespace model;
 class DB extends \PDO
 {
     private static $_instance;
-    private $conn;
 
     // Empêche l'instance d'être clonée
     private function __clone() { }

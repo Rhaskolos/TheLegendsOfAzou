@@ -2,8 +2,8 @@
 namespace model;
 
 interface ICRUD {
-    public static function create(array $data): ICRUD;
-    public static function read(int $id): ICRUD;
-    public function update(ICRUD $dao): bool;
-    public function delete(ICRUD $dao): bool;
+    public static function create(array $data);
+    public static function read(int $id);
+    public function update($dao): bool;
+    public function delete($dao): bool;
 }
