@@ -2,7 +2,7 @@
 
 namespace model;
 
-class DB extends PDO
+class DB extends \PDO
 {
     private static $_instance;
     private $conn;
