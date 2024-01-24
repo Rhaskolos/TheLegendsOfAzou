@@ -1,10 +1,3 @@
-CREATE TABLE coord(
-   id_coord INT AUTO_INCREMENT,
-   x_coord INT,
-   y_coord INT,
-   PRIMARY KEY(id_coord)
-);
-
 CREATE TABLE map(
    id_map INT AUTO_INCREMENT,
    heigth_map INT,
@@ -25,17 +18,16 @@ CREATE TABLE skill(
 
 CREATE TABLE entity(
    id_entity INT AUTO_INCREMENT,
+   x_entity INT NOT NULL,
+   y_entity INT NOT NULL,
    health_entity INT NOT NULL,
-   skill_entity INT NOT NULL,
    atk_physic_entity INT NOT NULL,
    atk_magic_entity INT NOT NULL,
    def_physic_entity INT NOT NULL,
    def_magic_entity INT NOT NULL,
-   id_skill INT NOT NULL,
-   id_coord INT NOT NULL,
+   id_skill INT,
    PRIMARY KEY(id_entity),
-   FOREIGN KEY(id_skill) REFERENCES skill(id_skill),
-   FOREIGN KEY(id_coord) REFERENCES coord(id_coord)
+   FOREIGN KEY(id_skill) REFERENCES skill(id_skill)
 );
 
 CREATE TABLE player(
@@ -50,13 +42,13 @@ CREATE TABLE player(
 
 CREATE TABLE tile(
    id_tile INT AUTO_INCREMENT,
+   x_tile INT NOT NULL,
+   y_tile INT NOT NULL,
    type_tile INT NOT NULL,
    id_skill INT,
-   id_coord INT NOT NULL,
    id_map INT NOT NULL,
    PRIMARY KEY(id_tile),
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill),
-   FOREIGN KEY(id_coord) REFERENCES coord(id_coord),
    FOREIGN KEY(id_map) REFERENCES map(id_map)
 );
 
@@ -64,16 +56,9 @@ CREATE TABLE item(
    id_item INT AUTO_INCREMENT,
    name_item VARCHAR(255)  NOT NULL,
    desc_item TEXT NOT NULL,
-   id_skill INT NOT NULL,
+   id_skill INT,
    PRIMARY KEY(id_item),
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill)
-);
-
-CREATE TABLE mob(
-   id_entity INT,
-   orientation_mob CHAR(1)  NOT NULL,
-   PRIMARY KEY(id_entity),
-   FOREIGN KEY(id_entity) REFERENCES entity(id_entity)
 );
 
 CREATE TABLE inventory(
