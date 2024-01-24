@@ -6,12 +6,6 @@ class DB extends \PDO
 {
     private static $_instance;
 
-    // Empêche l'instance d'être clonée
-    private function __clone() { }
-
-    // Empêche l'instance d'être désérialisée
-    private function __wakeup() { }
-
     private function __construct()
     {
         // TODO: switch to .env file
