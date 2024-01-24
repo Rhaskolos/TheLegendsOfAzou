@@ -12,7 +12,7 @@ class EntityDAO {
   private int $magicAttack;
   private int $physicDefense;
   private int $magicDefense;
-  private int $skill;
+  private ?int $skill;
 
 
   /**

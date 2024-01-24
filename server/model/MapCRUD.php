@@ -29,20 +29,22 @@ class MapCRUD {
 
   public static function read(int $id): MapDAO
   {
-    $row = DB::getInstance()
-      ->prepare("SELECT height_map, width_map, name_map, desc_map FROM map WHERE id_map = ?")
-      ->execute([$id])
-      ->fetch();
+    $db = DB::getInstance();
+    $stmt = $db->prepare("SELECT height_map, width_map, name_map, desc_map FROM map WHERE id_map = ?");
+    $stmt->execute([$id]);
+    $row = $stmt->fetch();
     if ($row === false){
       throw new \Exception("Map not found in database");
     }
     $map = new MapDAO();
     return $map
-      ->setId($row["id_map"])
+      ->setId($id)
       ->setHeight($row["height_map"])
       ->setWidth($row["width_map"])
       ->setName($row["name_map"])
       ->setDesc($row["desc_map"]);
+      //->setName(is_null($row["name_map"]) ? '' : $row["name_map"])
+      //->setDesc(is_null($row["desc_map"]) ? '' : $row["desc_map"]);
   }
 
   public static function update(MapDAO $map): bool

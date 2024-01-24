@@ -7,12 +7,19 @@ class MapDAO {
   private int    $id;
   private int    $height;
   private int    $width;
-  private string $name;
-  private string $desc;
-  private array  $tiles;
+  private ?string $name;
+  private ?string $desc;
+  private array  $tiles = [];
 
-  public function addTile(TileDAO $tile)
+  public function addTile($x, $y, $type)
   {
+    $tile = new TileDAO();
+    $tile
+      ->setX($y)
+      ->setY($y)
+      ->setType($type)
+      ->setMap($this->getId());
+    TileCRUD::create($tile);
     $this->tiles[] = $tile;
     return $this;
   }

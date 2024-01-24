@@ -9,7 +9,7 @@ class TileDAO {
   private int $y;
   private int $type;
   private int $map;
-  private int $skill;
+  private int $skill = 1;
 
 
   /**

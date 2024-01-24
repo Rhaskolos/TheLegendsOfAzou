@@ -25,10 +25,10 @@ class TileCRUD {
   }
 
   public static function read (int $id): TileDAO {
-    $row = DB::getInstance()
-      ->prepare("SELECT * FROM tile WHERE id_tile = ?")
-      ->execute([$id])
-      ->fetch();
+    $db = DB::getInstance();
+    $stmt = $db->prepare("SELECT * FROM tile WHERE id_tile = ?");
+    $stmt->execute([$id]);
+    $row = $stmt->fetch();
     if ($row === false){
       throw new \Exception("Tile not found in database");
     }

@@ -30,10 +30,10 @@ class EntityCRUD {
 
   public static function read(int $id): EntityDAO
   {
-    $row = DB::getInstance()
-    ->prepare("SELECT * FROM entity WHERE id_entity = ?")
-    ->execute([$id])
-    ->fetch();
+    $db = DB::getInstance();
+    $stmt = $db->prepare("SELECT * FROM entity WHERE id_entity = ?");
+    $stmt->execute([$id]);
+    $row = $stmt->fetch();
     if ($row === false){
       throw new \Exception("Tile not found in database");
     }
