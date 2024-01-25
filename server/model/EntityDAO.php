@@ -5,13 +5,18 @@ namespace model;
 class EntityDAO {
 
   private int $id;
+  private int $type;
   private int $x;
   private int $y;
   private int $health;
+  private int $moveSpeed;
+  private int $attackSpeed;
+  private int $attackRange;
   private int $physicAttack;
   private int $magicAttack;
   private int $physicDefense;
   private int $magicDefense;
+  private string $orientation;
   private ?int $skill;
 
 
@@ -191,6 +196,106 @@ class EntityDAO {
   public function setId($id)
   {
     $this->id = $id;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of attackSpeed
+   */ 
+  public function getAttackSpeed()
+  {
+    return $this->attackSpeed;
+  }
+
+  /**
+   * Set the value of attackSpeed
+   *
+   * @return  self
+   */ 
+  public function setAttackSpeed($attackSpeed)
+  {
+    $this->attackSpeed = $attackSpeed;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of moveSpeed
+   */ 
+  public function getMoveSpeed()
+  {
+    return $this->moveSpeed;
+  }
+
+  /**
+   * Set the value of moveSpeed
+   *
+   * @return  self
+   */ 
+  public function setMoveSpeed($moveSpeed)
+  {
+    $this->moveSpeed = $moveSpeed;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of attackRange
+   */ 
+  public function getAttackRange()
+  {
+    return $this->attackRange;
+  }
+
+  /**
+   * Set the value of attackRange
+   *
+   * @return  self
+   */ 
+  public function setAttackRange($attackRange)
+  {
+    $this->attackRange = $attackRange;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of orientation
+   */ 
+  public function getOrientation()
+  {
+    return $this->orientation;
+  }
+
+  /**
+   * Set the value of orientation
+   *
+   * @return  self
+   */ 
+  public function setOrientation($orientation)
+  {
+    $this->orientation = $orientation;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of type
+   */ 
+  public function getType()
+  {
+    return $this->type;
+  }
+
+  /**
+   * Set the value of type
+   *
+   * @return  self
+   */ 
+  public function setType($type)
+  {
+    $this->type = $type;
 
     return $this;
   }
