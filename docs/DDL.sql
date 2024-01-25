@@ -1,7 +1,7 @@
 CREATE TABLE map(
    id_map INT AUTO_INCREMENT,
-   height_map INT,
-   width_map INT,
+   height_map INT NOT NULL,
+   width_map INT NOT NULL,
    name_map VARCHAR(255) ,
    desc_map TEXT,
    PRIMARY KEY(id_map)
@@ -21,10 +21,14 @@ CREATE TABLE entity(
    x_entity INT NOT NULL,
    y_entity INT NOT NULL,
    health_entity INT NOT NULL,
+   move_speed INT NOT NULL,
+   atk_speed INT NOT NULL,
+   atk_range INT NOT NULL,
    atk_physic_entity INT NOT NULL,
    atk_magic_entity INT NOT NULL,
    def_physic_entity INT NOT NULL,
    def_magic_entity INT NOT NULL,
+   orientation_entity VARCHAR(1)  NOT NULL,
    id_skill INT,
    PRIMARY KEY(id_entity),
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill)
@@ -35,7 +39,6 @@ CREATE TABLE player(
    login_player VARCHAR(50)  NOT NULL,
    password_player CHAR(128) ,
    archetype_player TINYINT NOT NULL,
-   orientation_player VARCHAR(1)  NOT NULL,
    PRIMARY KEY(id_entity),
    FOREIGN KEY(id_entity) REFERENCES entity(id_entity)
 );
@@ -59,6 +62,16 @@ CREATE TABLE item(
    id_skill INT,
    PRIMARY KEY(id_item),
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill)
+);
+
+CREATE TABLE monster(
+   id_monster INT AUTO_INCREMENT,
+   type_monster INT NOT NULL,
+   move_pattern_monster VARCHAR(255) ,
+   id_entity INT NOT NULL,
+   PRIMARY KEY(id_monster),
+   UNIQUE(id_entity),
+   FOREIGN KEY(id_entity) REFERENCES entity(id_entity)
 );
 
 CREATE TABLE inventory(
