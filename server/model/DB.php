@@ -5,6 +5,7 @@ namespace model;
 class DB extends \PDO
 {
     private static $_instance;
+    protected int $transactionCounter = 0;
 
     private function __construct()
     {
@@ -43,4 +44,24 @@ class DB extends \PDO
     public function closeConnection() {
         static::$_instance = null;
     }
+
+    public function beginTransaction(): bool {
+        return $this->transactionCounter++ === 0
+            ? parent::beginTransaction()
+            : true;
+    }
+
+    public function commit(): bool {
+        return --$this->transactionCounter === 0
+            ? parent::commit()
+            : true;
+    }
+
+    public function rollBack(): bool {
+        return --$this->transactionCounter === 0
+            ? parent::rollBack()
+            : true;
+    }
+
+
 }
