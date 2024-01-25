@@ -8,9 +8,8 @@ class TileCRUD {
     $db = DB::getInstance();
     try {
       $db->beginTransaction();
-      $db
-        ->prepare("INSERT INTO tile (x_tile, y_tile, type_tile, id_map, id_skill) VALUES (?, ?, ?, ?, ?)")
-        ->execute([
+      $stmt = $db->prepare("INSERT INTO tile (x_tile, y_tile, type_tile, id_map, id_skill) VALUES (?, ?, ?, ?, ?)");
+      $stmt->execute([
           $tile->getX(),
           $tile->getY(),
           $tile->getType(),

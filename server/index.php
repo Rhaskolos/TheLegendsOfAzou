@@ -5,31 +5,39 @@ namespace model;
 require_once('./autoload.php');
 
 
-$map = MapCRUD::read(1);
-$map->setDesc("description level 01");
-MapCRUD::update($map);
+$player = new PlayerDAO();
+$player
+  ->setType(1)
+  ->setX(0)
+  ->setY(0)
+  ->setHealth(10)
+  ->setMoveSpeed(1)
+  ->setAttackSpeed(1)
+  ->setAttackRange(1)
+  ->setPhysicAttack(1)
+  ->setMagicAttack(1)
+  ->setPhysicDefense(1)
+  ->setMagicDefense(1)
+  ->setOrientation(1)
+  ->setSkill(1) // noskill
+  ->setLogin("bob")
+  ->setPassword("log");
+
+$ok = PlayerCRUD::create($player);
 
 
-/// ---8<---
+// read OK
+//$entity = EntityCRUD::read(2);
 
-/*
-$map2 = new MapDAO();
-$map2
-  ->setHeight(3)
-  ->setWidth(3)
-  ->setName("map de test 02")
-  ->setDesc("lorem ipsum");
-MapCRUD::create($map2);
+
+/* update OK
+$entity->setHealth(100);
+EntityCRUD::update($entity);
 */
 
+//$ok = EntityCRUD::delete($entity);
 
-$map = MapCRUD::read(1);
+//$entity = EntityDAO::fromPlayer($player);
 
-for ($y=0; $y < $map->getHeight(); $y++) { 
-  for ($x=0; $x < $map->getWidth(); $x++) { 
-    $map->addTile($x, $y, 1);
-  }
-}
 
-MapCRUD::update($map);
-var_dump($map);
+var_dump($player);

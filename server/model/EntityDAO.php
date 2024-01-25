@@ -20,6 +20,19 @@ class EntityDAO {
   private ?int $skill;
 
 
+  /** Because PHP is not a good language I had to use this dirty hack
+   *  to cast an instance to its parent class...
+   * @see https://gist.github.com/borzilleri/960035
+   */
+  public static function fromPersonage(PersonageDAO $personage): EntityDAO
+  {
+    return unserialize(preg_replace(
+      '/^O:\d+:"[^"]++"/',
+      "O:15:\"model\\EntityDAO\"",
+      serialize($personage)
+    ));
+  }
+
   /**
    * Get the value of skill
    */ 
