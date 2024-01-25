@@ -18,6 +18,7 @@ CREATE TABLE skill(
 
 CREATE TABLE entity(
    id_entity INT AUTO_INCREMENT,
+   type_entity INT NOT NULL,
    x_entity INT NOT NULL,
    y_entity INT NOT NULL,
    health_entity INT NOT NULL,
@@ -38,7 +39,6 @@ CREATE TABLE player(
    id_entity INT,
    login_player VARCHAR(50)  NOT NULL,
    password_player CHAR(128) ,
-   archetype_player TINYINT NOT NULL,
    PRIMARY KEY(id_entity),
    FOREIGN KEY(id_entity) REFERENCES entity(id_entity)
 );
@@ -66,7 +66,6 @@ CREATE TABLE item(
 
 CREATE TABLE monster(
    id_monster INT AUTO_INCREMENT,
-   type_monster INT NOT NULL,
    move_pattern_monster VARCHAR(255) ,
    id_entity INT NOT NULL,
    PRIMARY KEY(id_monster),
