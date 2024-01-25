@@ -30,21 +30,34 @@ class MapCRUD {
   public static function read(int $id): MapDAO
   {
     $db = DB::getInstance();
-    $stmt = $db->prepare("SELECT height_map, width_map, name_map, desc_map FROM map WHERE id_map = ?");
+    $stmt = $db->prepare("
+      SELECT M.height_map, M.width_map, M.name_map, M.desc_map, T.id_tile, T.x_tile, T.y_tile, T.type_tile
+      FROM map AS M
+      INNER JOIN tile as T ON T.id_map = M.id_map
+      WHERE M.id_map = ?
+    ");
     $stmt->execute([$id]);
-    $row = $stmt->fetch();
-    if ($row === false){
-      throw new \Exception("Map not found in database");
+    $all = $stmt->fetchAll();
+    $tiles = [];
+    foreach ($all as $row){
+      $tile = new TileDAO();
+      $tile
+        ->setId($row["id_tile"])
+        ->setX($row["x_tile"])
+        ->setY($row["y_tile"])
+        ->setType($row["type_tile"])
+        ->setMap($id);
+      $tiles[] = $tile;
     }
     $map = new MapDAO();
-    return $map
+    $map
       ->setId($id)
-      ->setHeight($row["height_map"])
-      ->setWidth($row["width_map"])
-      ->setName($row["name_map"])
-      ->setDesc($row["desc_map"]);
-      //->setName(is_null($row["name_map"]) ? '' : $row["name_map"])
-      //->setDesc(is_null($row["desc_map"]) ? '' : $row["desc_map"]);
+      ->setHeight($all[0]["height_map"])
+      ->setWidth($all[0]["width_map"])
+      ->setName($all[0]["name_map"])
+      ->setDesc($all[0]["desc_map"])
+      ->setTiles($tiles);
+    return $map;
   }
 
   public static function update(MapDAO $map): bool

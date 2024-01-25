@@ -17,6 +17,7 @@ class TileCRUD {
           $tile->getMap(),
           $tile->getSkill()
         ]);
+      $tile->setId($db->lastInsertId());
       return $db->commit();
     } catch (\PDOException $e) {
       $db->rollBack();
