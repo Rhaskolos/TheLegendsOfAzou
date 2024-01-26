@@ -28,8 +28,31 @@ class Map {
     }
 
     isObstacleAtPosition(x, y) {
-    return this.isValidePosition(x, y) && this.grid[y][x] === 1;
-}
+        return this.isValidePosition(x, y) && this.grid[y][x] === 1;
+    }
+
+    addEntity(entity) {
+        let x;
+        let y;
+       x = entity.xPosition;
+       y = entity.yPosition;
+
+        if(this.isValidePosition(x,y)) {
+           let currentGrid = this.grid;
+            currentGrid[y][x] = "M";
+            this.grid = currentGrid;    
+        }
+    }
+
+    isMobAtPosition(x, y) {
+        return this.isValidePosition(x, y) && this.grid[y][x] === "M";
+    }
+
+    initializeMobPosition(x, y) {
+        if (this.isValidePosition(x, y)) { 
+            this.grid[y][x] = "M";
+        }
+    }
 
 
     cleanCase(x,y) {
@@ -39,10 +62,14 @@ class Map {
         }
     }
 
-    initializeEntityPosition(x, y) {
+    initializePlayerPosition(x, y) {
         if (this.isValidePosition(x, y)) { 
-            this.grid[y][x] = "C";
+            this.grid[y][x] = "P";
         }
+    }
+
+    isPlayerAtPosition(x, y) {
+        return this.isValidePosition(x, y) && this.grid[y][x] === "P";
     }
 
     displayTable() {
@@ -56,9 +83,11 @@ class Map {
                 // Définir la couleur en fonction du type de cellule
                 if (cell === 1) { // Obstacle
                     fill(150); // Couleur grise pour les obstacles
-                } else if (cell === "C") { // Entité
+                } else if (cell === "P") { // Entité
                     fill(0, 255, 0); // Couleur verte pour les entités
-                } else {
+                } else if (cell === "M") {
+                    fill(255, 0, 0);
+                }else{
                     fill(255); // Couleur blanche pour les cellules vides
                 }
     

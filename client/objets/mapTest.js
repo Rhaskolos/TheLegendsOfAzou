@@ -254,4 +254,5 @@ mapTest.addObstacle(31, 15, tile123);
 mapTest.addObstacle(23, 24, tile124);
 
 
-mapTest.initializeEntityPosition(3, 13);
+
+mapTest.initializePlayerPosition(3, 13);

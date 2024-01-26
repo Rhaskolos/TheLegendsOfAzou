@@ -15,13 +15,13 @@ class MoveLeftAction {
 
         entity.orientation = "left";
 
-        if (!map.isObstacleAtPosition(newX, y) && map.isValidePosition(newX, y)) {
+        if (!map.isObstacleAtPosition(newX, y) && !map.isMobAtPosition(newX, y) && !map.isPlayerAtPosition(newX, y) && map.isValidePosition(newX, y)) {
             map.cleanCase(x, y);
 
             entity.xPosition = newX;
             entity.yPosition = y;
 
-            map.initializeEntityPosition(newX, y);
+            map.initializePlayerPosition(newX, y);
 
             console.log(name + " is moving left. " + name + " is looked at " + entity.orientation + " \n");
         } else {

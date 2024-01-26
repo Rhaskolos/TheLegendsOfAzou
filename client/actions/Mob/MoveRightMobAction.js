@@ -1,5 +1,4 @@
-
-class MoveRightAction {
+class MoveRightMobAction {
 
     static  run(entity) {
         let map;
@@ -15,13 +14,13 @@ class MoveRightAction {
 
         entity.orientation = "right";
 
-        if (!map.isObstacleAtPosition(newX, y) && map.isValidePosition(newX, y)) {
+        if (!map.isObstacleAtPosition(newX, y) && !map.isMobAtPosition(newX, y) &&  !map.isPlayerAtPosition(newX, y) && map.isValidePosition(newX, y)) {
             map.cleanCase(x, y);
 
             entity.xPosition = newX;
             entity.yPosition = y;
 
-            map.initializeEntityPosition(newX, y);
+            map.initializeMobPosition(newX, y);
 
             console.log(name + " is moving right. " + name + " is looked at " + entity.orientation + " \n");
         } else {
@@ -29,4 +28,3 @@ class MoveRightAction {
         }
     }
 }
-

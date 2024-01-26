@@ -1,7 +1,4 @@
-
-
-
-class MoveUpAction {
+class MoveUpMobAction {
 
 
     static run(entity) {
@@ -18,13 +15,13 @@ class MoveUpAction {
 
         entity.orientation = "up";
 
-        if (!map.isObstacleAtPosition(x, newY) && map.isValidePosition(x, newY)) {
+        if (!map.isObstacleAtPosition(x, newY) && !map.isMobAtPosition(x, newY) && !map.isPlayerAtPosition(x, newY) &&  map.isValidePosition(x, newY)) {
             map.cleanCase(x, y);
 
             entity.xPosition = x;
             entity.yPosition = newY;
 
-            map.initializeEntityPosition(x, newY);
+            map.initializeMobPosition(x, newY);
 
             console.log(name + " is moving up. " + name + " is looked at " + entity.orientation + " \n");
         } else {
@@ -32,4 +29,5 @@ class MoveUpAction {
         }
     }
 }
+
 
