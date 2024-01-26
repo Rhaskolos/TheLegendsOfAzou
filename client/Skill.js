@@ -5,4 +5,3 @@ class Skill {
     name;
 }
 
-export default Skill;

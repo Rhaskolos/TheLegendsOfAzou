@@ -11,5 +11,3 @@ class StopAction {
         console.log("Au revoir...\n");
     }
 }
-
-export default StopAction;

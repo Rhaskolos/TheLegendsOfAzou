@@ -1,30 +1,27 @@
 
 class MoveRightAction {
 
-    get name() {
-        return "MoveRight";
-    }
-
-    run(state) {
-
-        entity = state.entity;
-        map = state.map;
+    static  run(entity) {
+        let map;
+        let x;
+        let y;
+        map = entity.map;
 
         let name = entity.name;
-        let x = entity.xPosition;
-        let y = entity.yPosition;
+        x = entity.xPosition;
+        y = entity.yPosition;
         
         let newX = (entity.xPosition + 1);
 
         entity.orientation = "right";
 
-        if (!map.isObstacleAtPosition(newX, y) && map.isValidPosition(newX, y)) {
+        if (!map.isObstacleAtPosition(newX, y) && map.isValidePosition(newX, y)) {
             map.cleanCase(x, y);
 
             entity.xPosition = newX;
             entity.yPosition = y;
 
-            map.initializeEntityPosition(newX, y, entity.type);
+            map.initializeEntityPosition(newX, y);
 
             console.log(name + " is moving right. " + name + " is looked at " + entity.orientation + " \n");
         } else {
@@ -33,4 +30,3 @@ class MoveRightAction {
     }
 }
 
-export default MoveRightAction;

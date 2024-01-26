@@ -3,30 +3,27 @@
 
 class MoveDownAction {
 
-    get name() {
-        return "MoveDown";
-    }
-
-    run(state) {
-
-        entity = state.entity;
-        map = state.map;
+    static  run(entity) {
+        let map;
+        let x;
+        let y;
+        map = entity.map;
 
         let name = entity.name;
-        let x = entity.xPosition;
-        let y = entity.yPosition;
+        x = entity.xPosition;
+        y = entity.yPosition;
 
         let newY = (entity.yPosition + 1);
 
         entity.orientation = "down";
 
-        if (!map.isObstacleAtPosition(x, newY) && map.isValidPosition(x, newY)) {
+        if (!map.isObstacleAtPosition(x, newY) && map.isValidePosition(x, newY)) {
             map.cleanCase(x, y);
 
             entity.xPosition = x;
             entity.yPosition = newY;
 
-            map.initializeEntityPosition(x, newY, entity.type);
+            map.initializeEntityPosition(entity.xPosition,entity.yPosition);
 
             console.log(name + " is moving down. " + name + " is looked at " + entity.orientation + " \n");
         } else {
@@ -35,4 +32,3 @@ class MoveDownAction {
     }
 }
 
-export default MoveDownAction;

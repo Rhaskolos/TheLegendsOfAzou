@@ -1,4 +1,4 @@
-import Entity from "./Entity";
+
 
 class Ranger extends Entity {
 
@@ -18,4 +18,3 @@ class Ranger extends Entity {
     }
 }
 
-export default Ranger;

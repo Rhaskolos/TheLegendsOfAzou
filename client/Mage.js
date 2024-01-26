@@ -1,4 +1,4 @@
-import Entity from "./Entity";
+
 
 class Mage extends Entity {
 
@@ -19,4 +19,3 @@ class Mage extends Entity {
 }
 
 
-export default Mage;

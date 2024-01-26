@@ -6,43 +6,41 @@ class Map {
     width;
 
     constructor(sizeX, sizeY){
-        this.grid = (Array(sizeY).fill(null).map(() => Array (sizeX).fill(null)));
+        this.grid = (Array(sizeY).fill(0).map(() => Array (sizeX).fill(0)));
         this.height = sizeY;
         this.width = sizeX;
     }
 
-    isValidePosition(x,y){
-
-        return (y >= 0 && y < this.height && x >= 0 && x < this.width);
-        
+    isValidePosition(x, y) {
+        return y >= 0 && y < this.height && x >= 0 && x < this.width;
     }
+    
 
     addObstacle(x,y,tile) {
 
         if(this.isValidePosition(x,y)) {
            let currentGrid = this.grid;
-            currentGrid[y][x] = true;
+            currentGrid[y][x] = 1;
             this.grid = currentGrid;
             tile.xPosition = x;
             tile.yPosition = y;
         }
     }
 
-    isObstacleAtPosition(x,y) {
+    isObstacleAtPosition(x, y) {
+    return this.isValidePosition(x, y) && this.grid[y][x] === 1;
+}
 
-        return this.isValidePosition(x,y) && this.grid[y][x];
-    }
 
     cleanCase(x,y) {
 
         if (this.isValidePosition(x,y)) {
-            this.grid[y][x] = false;
+            this.grid[y][x] = 0;
         }
     }
 
-    initializeEntityPosition(x,y){
-
-        if (this.isValidePosition(x,y)) {
+    initializeEntityPosition(x, y) {
+        if (this.isValidePosition(x, y)) { 
             this.grid[y][x] = "C";
         }
     }
@@ -56,7 +54,7 @@ class Map {
                 let cell = this.grid[y][x];
     
                 // Définir la couleur en fonction du type de cellule
-                if (cell === true) { // Obstacle
+                if (cell === 1) { // Obstacle
                     fill(150); // Couleur grise pour les obstacles
                 } else if (cell === "C") { // Entité
                     fill(0, 255, 0); // Couleur verte pour les entités
@@ -70,37 +68,5 @@ class Map {
         }
     }
     
-
-
-    get grid(){
-
-        return this.grid;
-    }
-
-    set grid(value){
-
-        this.grid = value; 
-    }
-
-    get height(){
-
-        return this.height;
-    }
-
-    set height(value){
-
-        this.height = value;
-    }
-
-    get width() {
-
-        return this.width;
-    }
-
-    set width(value) {
-
-        this.width = value
-    }
 }
 
-export default Map;

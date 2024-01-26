@@ -1,4 +1,4 @@
-import Entity from "./Entity";
+
 
 class Melee extends Entity {
 
@@ -18,4 +18,3 @@ class Melee extends Entity {
     }
 }
 
-export default Melee;
