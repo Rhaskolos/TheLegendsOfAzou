@@ -15,27 +15,34 @@ class GameLoop {
 
     start() {
         this.started = true;
-        console.log("-----------------------------------\n");
-        console.log("Bienvenue dans \"The legend of Azou\"\n");
-        while (this.isStarted()) {
-            console.log("-----------------------------------\n\n");
-            console.log("Actions possibles: " + Object.keys(this.actions).join(", ") + "\n");
-            let userAction = prompt("Entrer une action : ");
-            console.log("Action choisie: " + userAction + "\n\n");
-            if (!this.actions.includes(userAction)) {
-                console.log("Erreur, cette action n'est pas disponible.\n");
-            } else {
-                let state = this.state;
-                let action = this.actions[userAction];
-                this.action.run(state);
-            }
-
-        }
-
     }
-
-    stop() {
-        this.started = false;
+    
+    keyPressed() {
+        if (!this.started) return;
+    
+        let userAction;
+        switch(keyCode) {
+            case 90: // Z
+                userAction = "up";
+                break;
+            case 83: // S
+                userAction = "down";
+                break;
+            case 81: // Q
+                userAction = "left";
+                break;
+            case 68: // D
+                userAction = "right";
+                break;
+        }
+    
+        if (userAction && this.actions[userAction]) {
+            let state = this.state;
+            let action = this.actions[userAction];
+            action.run(state);
+        } else {
+            console.log("Erreur, cette action n'est pas disponible.\n");
+        }
     }
 
     registerAction(action) {
@@ -46,7 +53,7 @@ class GameLoop {
 
     unregisterAction(action) {
         let name = action.name;
-        if (!this.actions.includes(name)) {
+        if (!this.actions[name]) {
             throw new GameException("Action " + name + " does not exists");
         }
         delete (this.actions[name]);

@@ -15,28 +15,41 @@ import Ranger from "./Ranger";
 import Skill from "./Skill";
 import Tile from "./Tile";
 
+let gameLoop;
+let map;
+
 
 function setup() {
 
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(500, 500);
 
 
     let melee = new Melee(Azou);
+    map = new Map(3,3);
+    let tile = new Tile(1);
+    melee.map = map;
+    map.initializeEntityPosition(0,0);
+    map.addObstacle(1,1,tile);
+    let gameState = new GameState(melee,map);
+    gameLoop = new GameLoop(gameState);
+    gameLoop.registerAction(MoveDownAction);
+    gameLoop.registerAction(MoveLeftAction);
+    gameLoop.registerAction(MoveRightAction);
+    gameLoop.registerAction(MoveUpAction);
+    
+    gameLoop.start();
 
-    gameLoop = new GameLoop(melee)
-    registerAction(MoveDownAction);
-    registerAction(MoveUpAction);
-    registerAction(MoveLeftAction);
-    registerAction(MoveRightAction);
-    registerAction(Stop);
+    
 }
 
 function draw() {
-
-    gameLoop.isStarted();
-    gameLoop.start();
+    background(50);
+   
+    map.displayTable();
+    
 }
 
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
+function keyPressed() {
+    gameLoop.keyPressed();
+    
 }

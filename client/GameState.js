@@ -4,12 +4,11 @@ class GameState {
     entity;
     tile;
     map;
-    gameLoop;
+  
 
-    constructor(entity){
+    constructor(entity,map){
         this.entity = entity;
-        this.gameLoop = new GameLoop(this);
-        this.map = new Map (3,3);
+        this.map = map;
     }
 
     get entity(){
