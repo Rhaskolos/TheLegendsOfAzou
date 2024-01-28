@@ -255,4 +255,3 @@ mapTest.addObstacle(23, 24, tile124);
 
 
 
-mapTest.initializePlayerPosition(3, 13);

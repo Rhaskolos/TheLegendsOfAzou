@@ -31,18 +31,6 @@ class Map {
         return this.isValidePosition(x, y) && this.grid[y][x] === 1;
     }
 
-    addEntity(entity) {
-        let x;
-        let y;
-       x = entity.xPosition;
-       y = entity.yPosition;
-
-        if(this.isValidePosition(x,y)) {
-           let currentGrid = this.grid;
-            currentGrid[y][x] = "M";
-            this.grid = currentGrid;    
-        }
-    }
 
     isMobAtPosition(x, y) {
         return this.isValidePosition(x, y) && this.grid[y][x] === "M";
@@ -73,9 +61,9 @@ class Map {
     }
 
     displayTable() {
-        let cellWidth = width / this.width; // 'width' est la largeur du canvas p5.js
-        let cellHeight = height / this.height; // 'height' est la hauteur du canvas p5.js
-    
+        let cellWidth = 32;
+        let cellHeight = 32;
+
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
                 let cell = this.grid[y][x];

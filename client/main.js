@@ -1,18 +1,24 @@
 
+let currentFrame = 0;
+let y = 0;
+
+
+
+
 function setup() {
 
-    createCanvas(900, 900);
+    createCanvas(1200, 1200);
 }
 
 function draw() {
-   
+
 
     mapTest.displayTable();
-
+    updateFrameSlimeTest();
 }
 
 function keyPressed() {
-    
+
     switch (keyCode) {
         case 90: // Z
             MoveUpAction.run(meleeTest);
