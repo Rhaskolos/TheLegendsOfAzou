@@ -1,7 +1,7 @@
 
 let slimeTest;
 
-slimeTest = new Slime("Slime1");
+slimeTest = new Slime("Snoopy");
 slimeTest.xPosition = 27;
 slimeTest.yPosition = 14;
 
@@ -13,9 +13,9 @@ slimeTest.map = mapTest;
 
 function updateFrameSlimeTest() {
     let frameMovePattern = 120;
-    if (currentFrame % frameMovePattern === 0) {
+    if (frameCountMovePattern % frameMovePattern === 0) {
         MovePatternAction.run(slimeTest,"LLLRRR");
     }
-    currentFrame++;
+    frameCountMovePattern++;
 
 }

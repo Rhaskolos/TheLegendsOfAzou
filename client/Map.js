@@ -67,8 +67,7 @@ class Map {
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
                 let cell = this.grid[y][x];
-    
-                // Définir la couleur en fonction du type de cellule
+
                 if (cell === 1) { // Obstacle
                     fill(150); // Couleur grise pour les obstacles
                 }else{

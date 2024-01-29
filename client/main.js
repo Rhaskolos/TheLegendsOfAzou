@@ -1,21 +1,8 @@
 
-let currentFrame = 0;
-let y = 0;
-
-let isMovingUp = false;
-let isMovingDown = false;
-let isMovingLeft = false;
-let isMovingRight = false;
-
-let frameCountUp = 0;
-let frameCountDown = 0;
-let frameCountLeft = 0;
-let frameCountRight = 0;
-
 function preload() {
     const spriteImageSlime = loadImage("../assets/slimeSprite.png");
     slimeTest.sprite = spriteImageSlime;
-    
+
     const spriteImageMelee = loadImage("../assets/meleeSprite.png");
     meleeTest.sprite = spriteImageMelee;
 
@@ -23,58 +10,44 @@ function preload() {
     tile1.sprite = spriteImageTile1;
 }
 
-
 function setup() {
 
-    createCanvas(1200, 1200);
+    createCanvas(1100, 1100);
 }
 
 function draw() {
 
 
     mapTest.displayTable();
+
     updateFrameSlimeTest();
-    if (slimeTest.sprite) {
-        let cellWidth = 32;
-        let cellHeight = 32;
-    
-        
-        let pixelX = slimeTest.xPosition * cellWidth;
-        let pixelY = slimeTest.yPosition * cellHeight;
-    
-        image(slimeTest.sprite, pixelX, pixelY, cellWidth, cellHeight);
-    }
 
-    if (meleeTest.sprite) {
-        let cellWidth = 32;
-        let cellHeight = 32;
-    
-    
-        let pixelX = meleeTest.xPosition * cellWidth;
-        let pixelY = meleeTest.yPosition * cellHeight;
-    
-        image(meleeTest.sprite, pixelX, pixelY, cellWidth, cellHeight);
-    }
+    let pixelXSlimeTest = slimeTest.xPosition * cellWidth;
+    let pixelYSlimeTest = slimeTest.yPosition * cellHeight;
 
-    if (tile1.sprite) {
-        let cellWidth = 32;
-        let cellHeight = 32;
+    image(slimeTest.sprite, pixelXSlimeTest, pixelYSlimeTest, cellWidth, cellHeight);
 
-        let pixelX = 2 * cellWidth;
-        let pixelY = 12 * cellHeight; 
-        
-        image(tile1.sprite, pixelX, pixelY, cellWidth, cellHeight);
-    }
-    if (isMovingUp && frameCountUp++ % 15 === 0) {
+
+    let pixelXMeleeTest = meleeTest.xPosition * cellWidth;
+    let pixelYMeleeTest = meleeTest.yPosition * cellHeight;
+
+    image(meleeTest.sprite, pixelXMeleeTest, pixelYMeleeTest, cellWidth, cellHeight);
+
+    let pixelXTile1 = 2 * cellWidth;
+    let pixelYTile1 = 12 * cellHeight;
+
+    image(tile1.sprite, pixelXTile1, pixelYTile1, cellWidth, cellHeight);
+
+    if (isMovingUp && frameCountMovePlayer++ % 15 === 0) {
         MoveUpAction.run(meleeTest);
     }
-    if (isMovingDown && frameCountDown++ % 15 === 0) {
+    if (isMovingDown && frameCountMovePlayer++ % 15 === 0) {
         MoveDownAction.run(meleeTest);
     }
-    if (isMovingLeft && frameCountLeft++ % 15 === 0) {
+    if (isMovingLeft && frameCountMovePlayer++ % 15 === 0) {
         MoveLeftAction.run(meleeTest);
     }
-    if (isMovingRight && frameCountRight++ % 15 === 0) {
+    if (isMovingRight && frameCountMovePlayer++ % 15 === 0) {
         MoveRightAction.run(meleeTest);
     }
 }
@@ -100,19 +73,19 @@ function keyReleased() {
     switch (keyCode) {
         case 90: // Z
             isMovingUp = false;
-            frameCountUp = 0;
+            frameCountMovePlayer = 0;
             break;
         case 83: // S
             isMovingDown = false;
-            frameCountDown = 0;
+            frameCountMovePlayer = 0;
             break;
         case 81: // Q
             isMovingLeft = false;
-            frameCountLeft = 0;
+            frameCountMovePlayer = 0;
             break;
         case 68: // D
             isMovingRight = false;
-            frameCountRight = 0;
+            frameCountMovePlayer = 0;
             break;
     }
 }
