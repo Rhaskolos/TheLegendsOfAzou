@@ -11,7 +11,7 @@ class PersonageDAO extends EntityDAO {
   /**
    * Get the value of password
    */ 
-  public function getPassword()
+  public function getPassword(): string
   {
     return $this->password;
   }
@@ -31,7 +31,7 @@ class PersonageDAO extends EntityDAO {
   /**
    * Get the value of login
    */ 
-  public function getLogin()
+  public function getLogin(): string
   {
     return $this->login;
   }
