@@ -6,6 +6,7 @@ class PersonageDAO extends EntityDAO {
 
   private string $login;
   private string $password;
+  private string $email;
 
   /**
    * Get the value of password
@@ -43,6 +44,26 @@ class PersonageDAO extends EntityDAO {
   public function setLogin($login)
   {
     $this->login = $login;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of email
+   */ 
+  public function getEmail()
+  {
+    return $this->email;
+  }
+
+  /**
+   * Set the value of email
+   *
+   * @return  self
+   */ 
+  public function setEmail($email)
+  {
+    $this->email = $email;
 
     return $this;
   }
