@@ -16,6 +16,7 @@ class Entity {
     xPosition;
     yPosition;
     map;
+    sprite;
 
     constructor (name) {
         this.name = name;

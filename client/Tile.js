@@ -6,6 +6,7 @@ class Tile {
     xPosition;
     yPosition;
     map;
+    sprite;
 
     constructor(type) {
     this.type = type;

@@ -71,10 +71,6 @@ class Map {
                 // Définir la couleur en fonction du type de cellule
                 if (cell === 1) { // Obstacle
                     fill(150); // Couleur grise pour les obstacles
-                } else if (cell === "P") { // Entité
-                    fill(0, 255, 0); // Couleur verte pour les entités
-                } else if (cell === "M") {
-                    fill(255, 0, 0);
                 }else{
                     fill(255); // Couleur blanche pour les cellules vides
                 }

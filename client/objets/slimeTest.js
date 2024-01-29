@@ -9,6 +9,7 @@ mapTest.initializeMobPosition(slimeTest.xPosition,slimeTest.yPosition);
 
 slimeTest.map = mapTest;
 
+ 
 
 function updateFrameSlimeTest() {
     let frameMovePattern = 120;
