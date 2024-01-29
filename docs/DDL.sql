@@ -1,8 +1,9 @@
-CREATE TABLE coord(
-   id_coord INT AUTO_INCREMENT,
-   x_coord INT,
-   y_coord INT,
-   PRIMARY KEY(id_coord)
+CREATE TABLE player(
+   id_player INT AUTO_INCREMENT,
+   login_player VARCHAR(50)  NOT NULL,
+   password_player CHAR(128) ,
+   email_player VARCHAR(255)  NOT NULL,
+   PRIMARY KEY(id_player)
 );
 
 CREATE TABLE map(
@@ -25,38 +26,34 @@ CREATE TABLE skill(
 
 CREATE TABLE entity(
    id_entity INT AUTO_INCREMENT,
+   type_entity INT,
+   x_entity INT NOT NULL,
+   y_entity INT NOT NULL,
    health_entity INT NOT NULL,
-   skill_entity INT NOT NULL,
+   move_speed_entity INT NOT NULL,
+   atk_speed_entity INT NOT NULL,
+   atk_range_entity INT,
    atk_physic_entity INT NOT NULL,
    atk_magic_entity INT NOT NULL,
    def_physic_entity INT NOT NULL,
    def_magic_entity INT NOT NULL,
-   id_skill INT NOT NULL,
-   id_coord INT NOT NULL,
+   orientation_entity CHAR(1)  NOT NULL,
+   id_map INT NOT NULL,
+   id_skill INT,
    PRIMARY KEY(id_entity),
-   FOREIGN KEY(id_skill) REFERENCES skill(id_skill),
-   FOREIGN KEY(id_coord) REFERENCES coord(id_coord)
-);
-
-CREATE TABLE player(
-   id_entity INT,
-   login_player VARCHAR(50)  NOT NULL,
-   password_player CHAR(128) ,
-   archetype_player TINYINT NOT NULL,
-   orientation_player VARCHAR(1)  NOT NULL,
-   PRIMARY KEY(id_entity),
-   FOREIGN KEY(id_entity) REFERENCES entity(id_entity)
+   FOREIGN KEY(id_map) REFERENCES map(id_map),
+   FOREIGN KEY(id_skill) REFERENCES skill(id_skill)
 );
 
 CREATE TABLE tile(
    id_tile INT AUTO_INCREMENT,
    type_tile INT NOT NULL,
-   id_skill INT,
-   id_coord INT NOT NULL,
+   x_tile INT NOT NULL,
+   y_tile INT NOT NULL,
+   id_skill INT NOT NULL,
    id_map INT NOT NULL,
    PRIMARY KEY(id_tile),
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill),
-   FOREIGN KEY(id_coord) REFERENCES coord(id_coord),
    FOREIGN KEY(id_map) REFERENCES map(id_map)
 );
 
@@ -69,11 +66,21 @@ CREATE TABLE item(
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill)
 );
 
-CREATE TABLE mob(
+CREATE TABLE monster(
    id_entity INT,
-   orientation_mob CHAR(1)  NOT NULL,
+   move_pattern_monster VARCHAR(255)  NOT NULL,
    PRIMARY KEY(id_entity),
    FOREIGN KEY(id_entity) REFERENCES entity(id_entity)
+);
+
+CREATE TABLE personage(
+   id_entity INT,
+   special_personage INT NOT NULL,
+   level_personage INT,
+   id_player INT NOT NULL,
+   PRIMARY KEY(id_entity),
+   FOREIGN KEY(id_entity) REFERENCES entity(id_entity),
+   FOREIGN KEY(id_player) REFERENCES player(id_player)
 );
 
 CREATE TABLE inventory(
