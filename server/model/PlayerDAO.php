@@ -21,7 +21,7 @@ class PersonageDAO extends EntityDAO {
    *
    * @return  self
    */ 
-  public function setPassword($password)
+  public function setPassword($password): static
   {
     $this->password = hash("sha512", $password);
 
@@ -41,7 +41,7 @@ class PersonageDAO extends EntityDAO {
    *
    * @return  self
    */ 
-  public function setLogin($login)
+  public function setLogin($login): static
   {
     $this->login = $login;
 
@@ -51,7 +51,7 @@ class PersonageDAO extends EntityDAO {
   /**
    * Get the value of email
    */ 
-  public function getEmail()
+  public function getEmail(): string
   {
     return $this->email;
   }
@@ -61,7 +61,7 @@ class PersonageDAO extends EntityDAO {
    *
    * @return  self
    */ 
-  public function setEmail($email)
+  public function setEmail($email): static
   {
     $this->email = $email;
 

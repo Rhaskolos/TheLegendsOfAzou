@@ -2,6 +2,9 @@
 
 namespace model;
 
+use Exception;
+use PDOException;
+
 class PlayerCRUD {
 
     public static function create(PlayerDAO $player): bool {
@@ -11,24 +14,27 @@ class PlayerCRUD {
             $stmt = $db->prepare("INSERT INTO player (login_player, password_player, email_player) VALUES (?, ?, ?)");
             $stmt->execute([
                 $player->getLogin(),
-                $player->getPassword(),
+                password_hash($player->getPassword(), PASSWORD_DEFAULT),
                 $player->getEmail()
             ]);
             $player->setId($db->lastInsertId());
             return $db->commit();
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $db->rollBack();
             return false;
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public static function read(int $id): PlayerDAO {
         $db = DB::getInstance();
         $stmt = $db->prepare("SELECT * FROM player WHERE id_player = ?");
         $stmt->execute([$id]);
         $row = $stmt->fetch();
         if ($row === false) {
-            throw new \Exception("Player not found in database");
+            throw new Exception("Player not found in database");
         }
         $player = new PlayerDAO();
         return $player
@@ -51,7 +57,7 @@ class PlayerCRUD {
                     $player->getId()
                 ]);
             return $db->commit();
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $db->rollBack();
             return false;
         }
@@ -65,7 +71,7 @@ class PlayerCRUD {
                 ->prepare("DELETE FROM player WHERE id_player = ?")
                 ->execute([$player->getId()]);
             return $db->commit();
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $db->rollBack();
             return false;
         }
