@@ -6,8 +6,17 @@ function preload() {
     const spriteImageMelee = loadImage("../assets/meleeSprite.png");
     meleeTest.sprite = spriteImageMelee;
 
+
+
     const spriteImageTile1 = loadImage("../assets/TileType1Sprite.png");
-    tile1.sprite = spriteImageTile1;
+    for (let i = 1; i <= 124; i++) {
+        tile[i].sprite = spriteImageTile1;
+    }
+
+    const spriteImageTile2 = loadImage("../assets/TileType4Sprite.png");
+    tile[125].sprite = spriteImageTile2;
+
+    
 }
 
 function setup() {
@@ -17,26 +26,13 @@ function setup() {
 
 function draw() {
 
-
-    mapTest.displayTable();
-
+   
+    mapTest.renderTile();
+    
+    mapTest. renderEntity();
+    
     updateFrameSlimeTest();
 
-    let pixelXSlimeTest = slimeTest.xPosition * cellWidth;
-    let pixelYSlimeTest = slimeTest.yPosition * cellHeight;
-
-    image(slimeTest.sprite, pixelXSlimeTest, pixelYSlimeTest, cellWidth, cellHeight);
-
-
-    let pixelXMeleeTest = meleeTest.xPosition * cellWidth;
-    let pixelYMeleeTest = meleeTest.yPosition * cellHeight;
-
-    image(meleeTest.sprite, pixelXMeleeTest, pixelYMeleeTest, cellWidth, cellHeight);
-
-    let pixelXTile1 = 2 * cellWidth;
-    let pixelYTile1 = 12 * cellHeight;
-
-    image(tile1.sprite, pixelXTile1, pixelYTile1, cellWidth, cellHeight);
 
     if (isMovingUp && frameCountMovePlayer++ % 15 === 0) {
         MoveUpAction.run(meleeTest);
