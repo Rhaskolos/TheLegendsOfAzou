@@ -6,8 +6,6 @@ class PersonageCRUD extends EntityCRUD {
 
   public static function create(EntityDAO|PersonageDAO $personage): bool
   {
-    $ok = EntityCRUD::create($personage);
-    var_dump(["ok entity?", $ok]);
     $db = DB::getInstance();
     try {
       $db->beginTransaction();

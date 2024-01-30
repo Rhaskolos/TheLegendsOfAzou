@@ -10,18 +10,43 @@ class MapDAO {
   private ?string $name;
   private ?string $desc;
   private array  $tiles = [];
+  private array  $mobs = [];
 
   public function addTile($x, $y, $type)
   {
     $tile = new TileDAO();
     $tile
-      ->setX($y)
+      ->setX($x)
       ->setY($y)
       ->setType($type)
       ->setMap($this->getId());
     TileCRUD::create($tile);
     $this->tiles[] = $tile;
     return $this;
+  }
+
+  public function addMob($x, $y, $type)
+  {
+    $mob = new MobDAO();
+    $mob
+      ->setX($x)
+      ->setY($y)
+      ->setType($type)
+      ->setMap($this->getId());
+    MobCRUD::create($mob);
+    $this->mobs[] = $mob;
+    return $this;
+  }
+
+  public function addPersonage($x, $y, $type)
+  {
+    $personage = new PersonageDAO();
+    $personage
+      ->setX($x)
+      ->setY($y)
+      ->setType($type)
+      ->setMap($this->getId());
+    PersonageCRUD::create($personage);
   }
 
   // ---8<---
@@ -142,6 +167,26 @@ class MapDAO {
   public function setTiles($tiles)
   {
     $this->tiles = $tiles;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of mobs
+   */ 
+  public function getMobs()
+  {
+    return $this->mobs;
+  }
+
+  /**
+   * Set the value of mobs
+   *
+   * @return  self
+   */ 
+  public function setMobs($mobs)
+  {
+    $this->mobs = $mobs;
 
     return $this;
   }
