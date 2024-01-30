@@ -53,13 +53,13 @@ class PlayerCRUD {
         return $player
             ->setId($id)
             ->setLogin($row["login_player"])
-            ->setPassword($row["password_player"]) // Assurez-vous de gérer le mot de passe de manière sécurisée
+            ->setPassword($row["password_player"])
             ->setEmail($row["email_player"]);
     }
 
     public static function login($login, $password): bool {
         if (empty($login) || empty($password)) {
-            return false; // ou lever une exception selon votre gestion d'erreurs
+            return false;
         }
 
         try {
