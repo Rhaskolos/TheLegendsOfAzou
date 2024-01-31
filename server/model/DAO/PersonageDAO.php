@@ -1,6 +1,6 @@
 <?php
 
-namespace model;
+namespace server\model\DAO;
 
 class PersonageDAO extends EntityDAO {
   
@@ -13,6 +13,31 @@ class PersonageDAO extends EntityDAO {
     parent::__construct();
   }
 
+  public function toArray() 
+    {
+       return [
+            "id" => getId(),
+            "type" => getType(),
+            "x" => getX(),
+            "y" => getY(),
+            "health" => getHealth(),
+            "moveSpeed" => getMoveSpeed(),
+            "attackSpeed" => getAttackSpeed(),
+            "attackRange" => getAttackRange(),
+            "physicAttack" => getPhysicAttack(),
+            "magicAttack" => getMagicAttack(),
+            "physicDefense" => getPhysicDefense(),
+            "magicDefense" => getMagicDefense(),
+            "orientation" => getOrientation(),
+            "map" => getMap(),
+            "skill" => getSkill(),
+            "player" => getPlayer(),
+            "special" => getSpecial(),
+            "level" => getLevel()
+
+        ];
+    }
+    
   /**
    * Get the value of special
    */ 

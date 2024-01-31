@@ -1,6 +1,10 @@
 <?php
 
-namespace model;
+namespace server\model\DAO;
+
+use server\model\CRUD\TileCRUD;
+use server\model\CRUD\MobCRUD;
+use server\model\CRUD\PersonageCRUD;
 
 class MapDAO {
 
@@ -11,6 +15,7 @@ class MapDAO {
   private ?string $desc;
   private array  $tiles = [];
   private array  $mobs = [];
+  private        $personage;
 
   public function addTile($x, $y, $type)
   {
@@ -47,8 +52,23 @@ class MapDAO {
       ->setType($type)
       ->setMap($this->getId());
     PersonageCRUD::create($personage);
+    $this->personage = $personage;
+    return $this;
   }
 
+
+  public function toArray() 
+  {
+    return [
+      "height" => getHeight(),
+      "width" => getWidth(),
+      "name" => getName(),
+      "desc" => getDesc(),
+      "tiles" => getTiles(),
+      "mobs" => getMobs()
+    ];
+    
+  }
   // ---8<---
 
   /**
@@ -187,6 +207,26 @@ class MapDAO {
   public function setMobs($mobs)
   {
     $this->mobs = $mobs;
+
+    return $this;
+  }
+
+    /**
+   * Get the value of personage
+   */ 
+  public function getPersonage()
+  {
+    return $this->personage;
+  }
+
+  /**
+   * Set the value of personage
+   *
+   * @return  self
+   */ 
+  public function setPersonage($personage)
+  {
+    $this->personage = $personage;
 
     return $this;
   }

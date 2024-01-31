@@ -1,6 +1,6 @@
 <?php
 
-namespace model;
+namespace server\core;
 
 class DB extends \PDO
 {

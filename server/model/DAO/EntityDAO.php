@@ -1,6 +1,6 @@
 <?php
 
-namespace model;
+namespace server\model\DAO;
 
 class EntityDAO {
 
