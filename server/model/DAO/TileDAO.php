@@ -12,6 +12,21 @@ class TileDAO {
   private int $skill = 1;
 
 
+  public function toArray() 
+  {
+     return [
+      "id" => $this->getId(),
+      "x" => $this->getX(),
+      "y" => $this->getY(),
+      "type" => $this->getType(),
+      "map" => $this->getMap(),
+      "skill" => $this->getSkill()  
+     ];
+    }
+
+
+
+
   /**
    * Get the value of id
    */ 

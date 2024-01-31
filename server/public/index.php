@@ -1,14 +1,15 @@
 <?php
-
+use server\Autoloader;
 use server\core\Router;
 
+require_once('../Autoloader.php');
 
-// On définit une constante contenant le dossier racine du projet
-define('ROOT', dirname(__DIR__));
+Autoloader::register();
 
-require_once(ROOT.'server/autoload.php');
 
-// On instancie Main (notre routeur)
+
+
+// On instancie notre routeur
 $app = new Router();
 
 // On démarre l'application

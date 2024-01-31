@@ -59,13 +59,29 @@ class MapDAO {
 
   public function toArray() 
   {
+    $tilesArray = [];
+    foreach ($this->tiles as $tile) {
+        $tilesArray[] = $tile->toArray();
+    }
+
+    $mobsArray = [];
+    foreach ($this->mobs as $mob) {
+        $mobsArray[] = $mob->toArray();
+    }
+
+    if ($this->personage !== null) {
+        $personageArray = $this->personage->toArray();
+    } else {
+        $personageArray = null;
+    }
     return [
-      "height" => getHeight(),
-      "width" => getWidth(),
-      "name" => getName(),
-      "desc" => getDesc(),
-      "tiles" => getTiles(),
-      "mobs" => getMobs()
+      "height" => $this->getHeight(),
+      "width" => $this->getWidth(),
+      "name" => $this->getName(),
+      "desc" => $this->getDesc(),
+      "tiles" => $tilesArray,
+      "mobs" => $mobsArray,
+      "personage" => $personageArray
     ];
     
   }

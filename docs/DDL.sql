@@ -8,7 +8,7 @@ CREATE TABLE player(
 
 CREATE TABLE map(
    id_map INT AUTO_INCREMENT,
-   heigth_map INT,
+   height_map INT,
    width_map INT,
    name_map VARCHAR(255) ,
    desc_map TEXT,

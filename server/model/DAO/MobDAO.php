@@ -15,22 +15,22 @@ class MobDAO extends EntityDAO
     public function toArray() 
     {
        return [
-            "id" => getId(),
-            "type" => getType(),
-            "x" => getX(),
-            "y" => getY(),
-            "health" => getHealth(),
-            "moveSpeed" => getMoveSpeed(),
-            "attackSpeed" => getAttackSpeed(),
-            "attackRange" => getAttackRange(),
-            "physicAttack" => getPhysicAttack(),
-            "magicAttack" => getMagicAttack(),
-            "physicDefense" => getPhysicDefense(),
-            "magicDefense" => getMagicDefense(),
-            "orientation" => getOrientation(),
-            "map" => getMap(),
-            "skill" => getSkill(),
-            "movePatternMob" => getMovePatternMob()
+            "id" => $this->getId(),
+            "type" => $this->getType(),
+            "x" => $this->getX(),
+            "y" => $this->getY(),
+            "health" => $this->getHealth(),
+            "moveSpeed" => $this->getMoveSpeed(),
+            "attackSpeed" => $this->getAttackSpeed(),
+            "attackRange" => $this->getAttackRange(),
+            "physicAttack" => $this->getPhysicAttack(),
+            "magicAttack" => $this->getMagicAttack(),
+            "physicDefense" => $this->getPhysicDefense(),
+            "magicDefense" => $this->getMagicDefense(),
+            "orientation" => $this->getOrientation(),
+            "map" => $this->getMap(),
+            "skill" => $this->getSkill(),
+            "movePatternMob" => $this->getMovePatternMob()
 
         ];
     }

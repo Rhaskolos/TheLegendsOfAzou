@@ -1,5 +1,7 @@
 <?php
 
+namespace server\core;
+
 function loaderEnv($file)
 {
 
@@ -17,7 +19,7 @@ function loaderEnv($file)
             putenv(trim($line));
         }
     } else {
-        throw new Exception("Error, file not found.");
+        var_dump("Error, file not found.");
     }
 }
 
