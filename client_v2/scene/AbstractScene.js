@@ -2,11 +2,9 @@ class AbstractScene {
 
   _sketch;
   _state;
-  _player;
 
   constructor(state) {
     this.state = state;
-    this.player = state.player;
   }
 
   get sketch() {
@@ -27,14 +25,6 @@ class AbstractScene {
   set state(in_state) {
     this._state = in_state;
   }
-
-  get player() {
-    return this._player;
-  }
-  set player(in_player) {
-    this._player = in_player;
-  }
-
 
 }
 

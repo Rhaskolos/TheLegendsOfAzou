@@ -26,6 +26,19 @@ class Map {
     console.log('Map.constructor() data:', data);
   }
 
+  render() {
+    this.renderTiles();
+    this.renderEntities();
+  }
+
+  renderTiles() {
+
+  }
+
+  renderEntities() {
+    
+  }
+
   get id() {
     return this._id;
   }

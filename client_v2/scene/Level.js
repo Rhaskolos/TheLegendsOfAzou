@@ -26,7 +26,7 @@ class Level extends MovableScene {
   }
 
   draw() {
-
+    super.draw();
   }
   
 }

@@ -9,11 +9,12 @@ class Player {
   _frameCountMove;
 
   constructor() {
-    this.isMovingUp = true;
-    this.isMovingDown = true;
-    this.isMovingLeft = true;
-    this.isMovingTight = true;
-    this.isMoving = true;
+    // TODO: grab login & email from PHP session
+    this.isMovingUp = false;
+    this.isMovingDown = false;
+    this.isMovingLeft = false;
+    this.isMovingTight = false;
+    this.isMoving = false;
     this.frameCountMove = 0;
   }
 
@@ -30,7 +31,7 @@ class Player {
   set email(in_email) {
     this._email = in_email;
   }
-  
+
   get isMovingUp() {
     return this._isMovingUp;
   }
