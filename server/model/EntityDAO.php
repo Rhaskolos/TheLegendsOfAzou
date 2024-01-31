@@ -17,21 +17,25 @@ class EntityDAO {
   private int $physicDefense;
   private int $magicDefense;
   private string $orientation;
-  private ?int $skill;
+  private int $map;
+  private int $skill;
 
 
   /** Because PHP is not a good language I had to use this dirty hack
    *  to cast an instance to its parent class...
    * @see https://gist.github.com/borzilleri/960035
    */
-  public static function fromPersonage(PersonageDAO $personage): EntityDAO
+  /*public static function fromPersonage(PersonageDAO $personage): EntityDAO
   {
     return unserialize(preg_replace(
       '/^O:\d+:"[^"]++"/',
       "O:15:\"model\\EntityDAO\"",
       serialize($personage)
     ));
-  }
+  }*/
+
+  public function __construct()
+  {}
 
   /**
    * Get the value of skill
@@ -309,6 +313,27 @@ class EntityDAO {
   public function setType($type)
   {
     $this->type = $type;
+
+    return $this;
+  }
+
+
+  /**
+   * Get the value of map
+   */ 
+  public function getMap()
+  {
+    return $this->map;
+  }
+
+  /**
+   * Set the value of map
+   *
+   * @return  self
+   */ 
+  public function setMap($map)
+  {
+    $this->map = $map;
 
     return $this;
   }

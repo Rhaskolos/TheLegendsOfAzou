@@ -1,0 +1,7 @@
+
+class Skill {
+
+    type;
+    name;
+}
+
