@@ -2,7 +2,7 @@
 
 namespace model;
 
-class PersonageDAO extends EntityDAO {
+class PlayerDAO {
 
   private string $login;
   private string $password;
@@ -16,11 +16,12 @@ class PersonageDAO extends EntityDAO {
     return $this->password;
   }
 
-  /**
-   * Set the value of password hashed with sha512
-   *
-   * @return  self
-   */ 
+    /**
+     * Set the value of password hashed with sha512
+     *
+     * @param $password
+     * @return  self
+     */
   public function setPassword($password): static
   {
     $this->password = hash("sha512", $password);
@@ -36,11 +37,12 @@ class PersonageDAO extends EntityDAO {
     return $this->login;
   }
 
-  /**
-   * Set the value of login
-   *
-   * @return  self
-   */ 
+    /**
+     * Set the value of login
+     *
+     * @param $login
+     * @return  self
+     */
   public function setLogin($login): static
   {
     $this->login = $login;
@@ -56,11 +58,12 @@ class PersonageDAO extends EntityDAO {
     return $this->email;
   }
 
-  /**
-   * Set the value of email
-   *
-   * @return  self
-   */ 
+    /**
+     * Set the value of email
+     *
+     * @param $email
+     * @return  self
+     */
   public function setEmail($email): static
   {
     $this->email = $email;
