@@ -1,8 +1,8 @@
 import entities from '../entities.js';
-import Scene from '../model/Scene.js';
+import MovableScene from './MovableScene.js';
 import Entity from '../model/Entity.js';
 
-class Level extends Scene {
+class Level extends MovableScene {
 
   preload(sketch) {
     const { name, sprite } = entities[1];
@@ -18,7 +18,7 @@ class Level extends Scene {
     slime.skill = 1;
     slime.name = name;
     slime.sprite = sketch.loadImage(sprite);
-    console.log('level.preload slime:', slime, this);
+    // console.log('level.preload slime:', slime, this);
   }
 
   setup(sketch) {
@@ -27,44 +27,6 @@ class Level extends Scene {
 
   draw() {
 
-  }
-
-  keyPressed() {
-    switch (keyCode) {
-      case 90: // Z
-        isMovingUp = true;
-        break;
-      case 83: // S
-        isMovingDown = true;
-        break;
-      case 81: // Q
-        isMovingLeft = true;
-        break;
-      case 68: // D
-        isMovingRight = true;
-        break;
-    }
-  }
-
-  keyReleased() {
-    switch (keyCode) {
-      case 90: // Z
-        isMovingUp = false;
-        frameCountMovePlayer = 0;
-        break;
-      case 83: // S
-        isMovingDown = false;
-        frameCountMovePlayer = 0;
-        break;
-      case 81: // Q
-        isMovingLeft = false;
-        frameCountMovePlayer = 0;
-        break;
-      case 68: // D
-        isMovingRight = false;
-        frameCountMovePlayer = 0;
-        break;
-    }
   }
   
 }

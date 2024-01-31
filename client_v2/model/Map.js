@@ -9,21 +9,21 @@ class Map {
   _name;
   _description;
 
-  static build(id) {
-    fetch(`${API_URL}/map/${id}`, {
+  static async build(id) {
+    return await fetch(`${API_URL}/${id}`, {
       method: 'GET',
       credentials: 'include'
     })
-      .then(data => {
-
-      })
+      .then(response => response.json())
+      .then(json => new Map(json))
       .catch(err => {
-
+        console.warn('Map.build() error:', err.message);
+        throw err;
       });
   }
 
-  constructor(id){
-
+  constructor(data){
+    console.log('Map.constructor() data:', data);
   }
 
   get id() {
