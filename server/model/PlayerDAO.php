@@ -2,7 +2,7 @@
 
 namespace model;
 
-class PlayerDAO extends EntityDAO {
+class PlayerDAO {
 
   private string $login;
   private string $password;
