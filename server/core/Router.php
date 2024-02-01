@@ -34,17 +34,19 @@ class Router
         if(isset($_GET['p']))
             $params = explode('/', $_GET['p']);
 
-        // var_dump($params);
         if($params[0] != ''){
+
             // On a au moins 1 paramètre
             // On récupère le nom du contrôleur à instancier
             // On met une majuscule en 1ère lettre, on ajoute le namespace complet avant et on ajoute "Controller" après
+            // exemple de route : http://localhost/TheLegendsOfAzou/server/public/map/loadElement/1
             $controller = '\\server\\controllers\\'.ucfirst(array_shift($params)).'Controller';
 
             // On instancie le contrôleur
             $controller = new $controller();
 
             // On récupère le 2ème paramètre d'URL
+            // on redirige vers une méthode de base index si par de paramètre (n'a pas encore été créee dans les routes)
             $action = (isset($params[0])) ? array_shift($params) : 'index';
 
             if(method_exists($controller, $action)){

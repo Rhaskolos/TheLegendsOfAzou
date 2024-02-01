@@ -15,12 +15,9 @@ class TileDAO {
   public function toArray() 
   {
      return [
-      "id" => $this->getId(),
       "x" => $this->getX(),
       "y" => $this->getY(),
       "type" => $this->getType(),
-      "map" => $this->getMap(),
-      "skill" => $this->getSkill()  
      ];
     }
 

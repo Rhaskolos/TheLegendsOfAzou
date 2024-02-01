@@ -33,7 +33,7 @@ class MapCRUD {
     }
   }
 
-  public static function read(int $id, int $idPlayer): MapDAO
+  public static function read(int $id): MapDAO
   {
     $db = DB::getInstance();
     $stmt = $db->prepare("
@@ -96,9 +96,9 @@ class MapCRUD {
       INNER JOIN entity as E ON E.id_map = M.id_map
       INNER JOIN personage as P ON P.id_entity = E.id_entity
       INNER JOIN player as PL ON PL.id_player = P.id_player
-      WHERE M.id_map = ? and PL.id_player = ?
+      WHERE M.id_map = ?
   ");
-  $stmt->execute([$id, $idPlayer]);
+  $stmt->execute([$id]);
   $allPersonages = $stmt->fetchAll();
 
   $personage = null;
@@ -122,9 +122,9 @@ if (!empty($allPersonages)) {
       ->setSkill($row["id_skill"])
       ->setSpecial($row["special_personage"])
       ->setLevel($row["level_personage"])
-
-      ->setMap($id)
-      ->setPlayer($idPlayer);
+      ->setPlayer($row["id_player"])
+      ->setMap($id);
+      
 }
     $map = new MapDAO();
     $map

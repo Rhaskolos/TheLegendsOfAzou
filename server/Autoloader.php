@@ -13,8 +13,6 @@ class Autoloader
 
     static function autoload($class)
     {
-        // On récupère dans $class la totalité du namespace de la classe concernée (App\Client\Compte)
-        // On retire App\ (Client\Compte)
         $class = str_replace(__NAMESPACE__ . '\\', '', $class);
         
         // On remplace les \ par des /

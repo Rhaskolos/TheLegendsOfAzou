@@ -1,14 +1,13 @@
 <?php
 
 namespace server\core;
-
-require_once("loaderEnv.php");
-
+use server\core\AutoloaderEnv;
 
 
+// chemin absolu pour que cela fonctionne : "C:\\wamp64\\www\\TheLegendsOfAzou\\server\\core\\.env"
 
 
- die;
+AutoloaderEnv::loaderEnv("C:\\wamp64\\www\\TheLegendsOfAzou\\server\\core\\.env");
 
 class DB extends \PDO
 {
@@ -19,14 +18,12 @@ class DB extends \PDO
 
     private function __construct()
     {
-        loaderEnv(".env");
+        // récuperation des variables d'environnements
         $host = getenv('DB_HOST');
         $username = getenv('DB_USERNAME');
         $password = getenv('DB_PASSWORD');
         $database = getenv('DB_NAME');
-
       
-
         try {
             $options = [
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,

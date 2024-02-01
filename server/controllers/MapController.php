@@ -3,27 +3,25 @@
 namespace server\controllers;
 
 use server\model\CRUD\MapCRUD;
-use server\model\DAO\MapDAO;
-
-
 
 class MapController 
 {
-    public function loadElement($id,$idPlayer)
+    public function loadElement($id)
     {
 
-        $mapDAO = MapCRUD::read($id,$idPlayer);
+        $mapDAO = MapCRUD::read($id);
 
         $mapArray = $mapDAO->toArray();
 
         // Encoder en JSON
         $json = json_encode($mapArray);
 
-        // Écrire dans un fichier
-        file_put_contents('mapData.json', $json);
+        
+        // Envoi du fichier Json
+        header("Content-Type: application/json");
+        echo $json;
     }
 }
 
-$test = new MapController();
-$test->loadElement(1,1);
 
+// acces à cette route pour la méthode loadElement : http://localhost/TheLegendsOfAzou/server/public/map/loadElement/? remplacer ? par l'id que l'on recherche 

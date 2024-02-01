@@ -4,7 +4,6 @@ namespace model;
 
 use Exception;
 use PDOException;
-
 class PlayerCRUD {
 
     public static function create(PlayerDAO $player): bool {

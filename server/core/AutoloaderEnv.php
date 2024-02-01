@@ -2,7 +2,9 @@
 
 namespace server\core;
 
-function loaderEnv($file)
+class AutoloaderEnv {
+
+    static function  loaderEnv($file)
 {
 
     if (file_exists($file)) {
@@ -22,14 +24,4 @@ function loaderEnv($file)
         var_dump("Error, file not found.");
     }
 }
-
-
-/*
-for loading .env file : 
-
-loaderEnv(".env");
-
-for save value of .env : 
-
-$save = getenv($value)
-*/
+}
