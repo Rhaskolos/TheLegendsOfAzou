@@ -10,7 +10,7 @@ class Map {
   _description;
 
   static async build(id) {
-    return await fetch(`${API_URL}/${id}`, {
+    return await fetch(`${API_URL}/map/${id}`, {
       method: 'GET',
       credentials: 'include'
     })
