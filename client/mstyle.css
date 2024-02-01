@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+body {
+    font-family: Cinzel, sans-serif;
+    font-size: 3rem;
+    background-image: url('assets/menu.png');
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+    color: #b99a7c;
+    text-align: center;
+    padding-top: 100px;
+}
+
+#menu button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 2.2rem;
+    font-weight: bolder;
+    font-family: Cinzel, sans-serif;
+    background-color: #444;
+    color: #e1cbaa;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#menu button:hover {
+    background-color: #555;
+}
