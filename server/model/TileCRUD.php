@@ -1,9 +1,9 @@
 <?php
 
-namespace model\CRUD;
+namespace model;
 
 use DB;
-use model\DAO\TileDAO;
+use model\TileDAO;
 
 class TileCRUD {
 

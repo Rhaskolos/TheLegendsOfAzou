@@ -1,10 +1,10 @@
 <?php
 
-namespace model\CRUD;
+namespace model;
 
 use DB;
-use model\DAO\EntityDAO;
-use model\DAO\PersonageDAO;
+use model\EntityDAO;
+use model\PersonageDAO;
 
 class PersonageCRUD extends EntityCRUD {
 

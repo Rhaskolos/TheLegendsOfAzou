@@ -1,10 +1,10 @@
 <?php
 
-namespace model\DAO;
+namespace model;
 
-use model\CRUD\TileCRUD;
-use model\CRUD\MobCRUD;
-use model\CRUD\PersonageCRUD;
+use model\TileCRUD;
+use model\MobCRUD;
+use model\PersonageCRUD;
 
 class MapDAO {
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace model\CRUD;
+namespace model;
 
 use Exception;
 use PDOException;
 use DB;
-use model\DAO\PlayerDAO;
+use model\PlayerDAO;
 
 class PlayerCRUD {
 

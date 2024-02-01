@@ -1,12 +1,12 @@
 <?php
 
-namespace model\CRUD;
+namespace model;
 
 use DB;
-use model\DAO\MapDAO;
-use model\DAO\TileDAO;
-use model\DAO\MobDAO;
-use model\DAO\PersonageDAO;
+use model\MapDAO;
+use model\TileDAO;
+use model\MobDAO;
+use model\PersonageDAO;
 
 class MapCRUD {
 

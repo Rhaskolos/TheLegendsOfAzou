@@ -1,10 +1,10 @@
 <?php
 
-namespace model\CRUD;
+namespace model;
 
 use DB;
-use model\DAO\EntityDAO;
-use model\DAO\MobDAO;
+use model\EntityDAO;
+use model\MobDAO;
 
 class MobCRUD extends EntityCRUD {
 

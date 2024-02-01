@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-use model\CRUD\MapCRUD;
+use model\MapCRUD;
 
 class MapController 
 {
