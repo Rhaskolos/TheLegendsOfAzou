@@ -14,7 +14,7 @@ LoaderEnv::loadEnv(".env");
 // On instancie notre routeur
 $router = new Router();
 
-$router->addRouteGET("map");
+$router->addRoute("GET", "map");
 
 // On démarre l'application
 $router->delegate();

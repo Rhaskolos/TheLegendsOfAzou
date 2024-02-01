@@ -5,33 +5,44 @@ namespace controller;
 class Router
 {
 
-    private $routesGET;
-    private $routesPOST;
+    private $routes;
+
 
     public function __construct()
     {
-        $this->routesGET = [];
-        $this->routesPOST = [];
+        $this->routes = [
+            "GET" => [],
+            "POST" => [],
+            "PUT" => [],
+            "DELETE" => []
+
+        ];
     }
 
-    public function addRouteGET($url)
+    public function addRoute($method, $url)
     {
-        $class = "\\controller\\" . ucfirst($url) . "Controller";
-        $this->routesGET[$url] = $class;
+        $method = strtoupper($method);
+        if (!isset($this->routes[$method])) {
+            throw new \Exception("Méthode HTTP non supportée");
+        }
+        $this->routes[$method][$url] = "\\controller\\" . ucfirst($url) . "Controller";
     }
 
-    public function addRoutePOST($url)
+    private function chooseRoad($method, $route, $param)
     {
-        $class = "\\controller\\" . ucfirst($url) . "Controller";
-        $this->routesPOST[$url] = $class;
+        if (array_key_exists($route, $this->routes[$method])) {
+
+            $class = $this->routes[$method][$route];
+            $controller = new $class();
+            $controller->methodRoad($method, $param);
+        }
     }
 
     public function delegate()
     {
 
-        // On récupère l'URL : Est-ce que cette partie était importante vu que l'on fait une redirection si pas de parametre ? 
-       // $uri = $_SERVER['REQUEST_URI'];
 
+        $method = $_SERVER['REQUEST_METHOD'];
 
         // On gère les paramètres d'URL
         // p=controleur/paramètre
@@ -48,6 +59,8 @@ class Router
             case 1:
                 // un seul paramètre c'est le nom de la route
                 $route = $params[0];
+                $param = null;
+
                 break;
             case 2:
                 // deux paramètres c'est le nom de la route et un argument
@@ -61,42 +74,6 @@ class Router
                 exit();
         }
 
-        // switch en fonction de la méthode de requête
-        switch ($_SERVER['REQUEST_METHOD']) {
-            case 'GET':
-                // vérifie qu'on a bien une route enregistrée pour ce endpoint
-                if (array_key_exists($route, $this->routesGET)) {
-
-                    if (!empty($param)) {
-                        $class = $this->routesGET[$route];
-                        $controller = new $class();
-                        $controller->getMethodParam($param);
-                    } else {
-                        $class = $this->routesGET[$route];
-                        $controller = new $class();
-                        $controller->getMethod();
-                    }
-                }
-                break;
-            case 'POST':
-                if (array_key_exists($route, $this->routesPOST)) {
-                    if (!empty($param)) {
-                        $class = $this->routesPOST[$route];
-                        $controller = new $class();
-                        $controller->postMethodParam($param);
-                    } else {
-                        $class = $this->routesPOST[$route];
-                        $controller = new $class();
-                        $controller->postMethod();
-                    }
-                    break;
-                }
-            default:
-                // on ne gère pas cette requête donc renvoie le code HTTP 405 (Method Not Allowed)
-                http_response_code(405);
-                // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-                throw new \Exception("Invalid request method");
-                exit();
-        }
+        $this->chooseRoad($method, $route, $param);
     }
 }
