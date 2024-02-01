@@ -41,9 +41,9 @@ class PlayerCRUD {
         $player = new PlayerDAO();
         return $player
             ->setId($id)
-            ->setLogin($row["login"])
-            ->setPassword($row["password"])
-            ->setEmail($row["email"]);
+            ->setLogin($row["login_player"])
+            ->setPassword($row["password_player"])
+            ->setEmail($row["email_player"]);
     }
 
     public static function update(PlayerDAO $player): bool {
