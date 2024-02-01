@@ -1,12 +1,12 @@
 <?php
 
-namespace controllers;
+namespace controller;
 
 use model\MapCRUD;
 
-class MapController 
+class MapController
 {
-    static function loadElement($id)
+    public function getMethodParam($id)
     {
 
         $mapDAO = MapCRUD::read($id);
@@ -16,11 +16,13 @@ class MapController
         // Encoder en JSON
         $json = json_encode($mapArray);
 
-        
+
         // Envoi du fichier Json
         header("Content-Type: application/json");
         echo $json;
     }
-}
 
-// la route pour appeler la méthode loadElement de MapController.php : "http://localhost/TheLegendsOfAzou/server/map/loadElement/?" remplacer "?" par l'id recherché
+    public function getMethod()
+    {
+    }
+}
