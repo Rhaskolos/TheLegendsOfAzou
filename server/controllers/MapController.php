@@ -1,8 +1,8 @@
 <?php
 
-namespace server\controllers;
+namespace controllers;
 
-use server\model\CRUD\MapCRUD;
+use model\CRUD\MapCRUD;
 
 class MapController 
 {
@@ -23,5 +23,4 @@ class MapController
     }
 }
 
-
-// acces à cette route pour la méthode loadElement : http://localhost/TheLegendsOfAzou/server/public/map/loadElement/? remplacer ? par l'id que l'on recherche 
+// la route pour appeler la méthode loadElement de MapController.php : "http://localhost/TheLegendsOfAzou/server/map/loadElement/?" remplacer "?" par l'id recherché

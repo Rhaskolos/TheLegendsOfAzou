@@ -1,8 +1,8 @@
 <?php
 
-namespace model;
+namespace model\DAO;
 
-class PersonageDAO extends EntityDAO {
+class PlayerDAO {
 
   private string $login;
   private string $password;

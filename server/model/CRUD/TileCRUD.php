@@ -1,9 +1,9 @@
 <?php
 
-namespace server\model\CRUD;
+namespace model\CRUD;
 
-use server\core\DB;
-use server\model\DAO\TileDAO;
+use DB;
+use model\DAO\TileDAO;
 
 class TileCRUD {
 
@@ -38,11 +38,11 @@ class TileCRUD {
     $tile = new TileDAO();
     return $tile
       ->setId($id)
-      ->setX($row["x"])
-      ->setY($row["y"])
-      ->setType($row["type"])
-      ->setMap($row["map"])
-      ->setSkill($row["skill"]);
+      ->setX($row["x_tile"])
+      ->setY($row["y_tile"])
+      ->setType($row["type_tile"])
+      ->setMap($row["id_map"])
+      ->setSkill($row["id_skill"]);
   }
 
   public static function update (TileDAO $tile): bool {

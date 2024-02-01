@@ -1,9 +1,12 @@
 <?php
 
-namespace model;
+namespace model\CRUD;
 
 use Exception;
 use PDOException;
+use DB;
+use model\DAO\PlayerDAO;
+
 class PlayerCRUD {
 
     public static function create(PlayerDAO $player): bool {

@@ -1,10 +1,14 @@
 <?php
-use server\Autoloader;
-use server\core\Router;
 
-require_once('../Autoloader.php');
+
+use controllers\Router;
+
+require_once("Autoloader.php");
+require_once("LoaderEnv.php");
 
 Autoloader::register();
+
+LoaderEnv::loadEnv(".env");
 
 
 
@@ -14,5 +18,4 @@ $app = new Router();
 
 // On démarre l'application
 $app->start();
-
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace server\model\CRUD;
+namespace model\CRUD;
 
-use server\core\DB;
-use server\model\DAO\EntityDAO;
+use DB;
+use model\DAO\EntityDAO;
 
 class EntityCRUD {
 

@@ -1,5 +1,5 @@
 <?php
-namespace server;
+
 
 class Autoloader
 {
@@ -13,15 +13,11 @@ class Autoloader
 
     static function autoload($class)
     {
-        $class = str_replace(__NAMESPACE__ . '\\', '', $class);
-        
-        // On remplace les \ par des /
-        $class = str_replace('\\', '/', $class);
-
-        $fichier = __DIR__ . '/' . $class . '.php';
+        $classPath = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+       
         // On vérifie si le fichier existe
-        if(file_exists($fichier)){
-            require_once $fichier;
+        if(file_exists($classPath)){
+            require_once $classPath;
         }
     }
 }

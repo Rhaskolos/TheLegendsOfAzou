@@ -1,13 +1,5 @@
 <?php
 
-namespace server\core;
-use server\core\AutoloaderEnv;
-
-
-// chemin absolu pour que cela fonctionne : "C:\\wamp64\\www\\TheLegendsOfAzou\\server\\core\\.env"
-
-
-AutoloaderEnv::loaderEnv("C:\\wamp64\\www\\TheLegendsOfAzou\\server\\core\\.env");
 
 class DB extends \PDO
 {

@@ -1,10 +1,9 @@
 <?php
 
-namespace server\core;
 
-class AutoloaderEnv {
+class LoaderEnv {
 
-    static function  loaderEnv($file)
+    static function  loadEnv($file)
 {
 
     if (file_exists($file)) {

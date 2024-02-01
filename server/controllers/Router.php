@@ -1,6 +1,6 @@
 <?php
 
-namespace server\core;
+namespace controllers;
 
 
 class Router 
@@ -8,8 +8,7 @@ class Router
 
     public function start()
     {
-        // On démarre la session
-        session_start();
+
 
         // On retire le "trailing slash" éventuel de l'URL
         // On récupère l'URL
@@ -39,15 +38,20 @@ class Router
             // On a au moins 1 paramètre
             // On récupère le nom du contrôleur à instancier
             // On met une majuscule en 1ère lettre, on ajoute le namespace complet avant et on ajoute "Controller" après
-            // exemple de route : http://localhost/TheLegendsOfAzou/server/public/map/loadElement/1
-            $controller = '\\server\\controllers\\'.ucfirst(array_shift($params)).'Controller';
+            $controller = '\\controllers\\'.ucfirst(array_shift($params)).'Controller';
 
             // On instancie le contrôleur
             $controller = new $controller();
 
-            // On récupère le 2ème paramètre d'URL
-            // on redirige vers une méthode de base index si par de paramètre (n'a pas encore été créee dans les routes)
-            $action = (isset($params[0])) ? array_shift($params) : 'index';
+            
+           if(isset($params[0]) && !empty($params[0])) {
+            $action = array_shift($params);
+        } else {
+
+            http_response_code(400);
+            echo "Aucune action spécifiée pour ce contrôleur.";
+            return;
+        }
 
             if(method_exists($controller, $action)){
                 // Si il reste des paramètres on les passe à la méthode
