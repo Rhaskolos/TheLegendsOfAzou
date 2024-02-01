@@ -1,6 +1,5 @@
 <?php
 
-
 use controllers\Router;
 
 require_once("Autoloader.php");
@@ -15,6 +14,8 @@ LoaderEnv::loadEnv(".env");
 
 // On instancie notre routeur
 $app = new Router();
+
+$app->addRouteGET('map', MapController);
 
 // On démarre l'application
 $app->start();
