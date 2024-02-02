@@ -16,11 +16,12 @@ class PlayerDAO {
     return $this->password;
   }
 
-  /**
-   * Set the value of password hashed with sha512
-   *
-   * @return  self
-   */ 
+    /**
+     * Set the value of password hashed with sha512
+     *
+     * @param $password
+     * @return  self
+     */
   public function setPassword($password): static
   {
     $this->password = hash("sha512", $password);
@@ -36,11 +37,12 @@ class PlayerDAO {
     return $this->login;
   }
 
-  /**
-   * Set the value of login
-   *
-   * @return  self
-   */ 
+    /**
+     * Set the value of login
+     *
+     * @param $login
+     * @return  self
+     */
   public function setLogin($login): static
   {
     $this->login = $login;
@@ -56,11 +58,12 @@ class PlayerDAO {
     return $this->email;
   }
 
-  /**
-   * Set the value of email
-   *
-   * @return  self
-   */ 
+    /**
+     * Set the value of email
+     *
+     * @param $email
+     * @return  self
+     */
   public function setEmail($email): static
   {
     $this->email = $email;

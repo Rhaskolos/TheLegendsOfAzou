@@ -16,12 +16,12 @@ CREATE TABLE map(
 );
 
 CREATE TABLE skill(
-   id_skill INT AUTO_INCREMENT,
-   name_skill VARCHAR(255) ,
-   desc_skill TEXT,
-   cost_skill INT NOT NULL,
-   range_skill INT NOT NULL,
-   PRIMARY KEY(id_skill)
+  id_skill INT AUTO_INCREMENT,
+  name_skill VARCHAR(255) ,
+  desc_skill TEXT,
+  cost_skill INT NOT NULL,
+  range_skill INT NOT NULL,
+  PRIMARY KEY(id_skill)
 );
 
 CREATE TABLE entity(
@@ -91,4 +91,14 @@ CREATE TABLE inventory(
    PRIMARY KEY(id_entity, id_item),
    FOREIGN KEY(id_entity) REFERENCES entity(id_entity),
    FOREIGN KEY(id_item) REFERENCES item(id_item)
+);
+
+CREATE TABLE inventory(
+  id_entity INT,
+  id_item INT,
+  slot_inventory INT NOT NULL,
+  count_item INT NOT NULL,
+  PRIMARY KEY(id_entity, id_item),
+  FOREIGN KEY(id_entity) REFERENCES entity(id_entity),
+  FOREIGN KEY(id_item) REFERENCES item(id_item)
 );
