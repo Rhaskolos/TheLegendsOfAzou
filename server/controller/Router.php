@@ -1,7 +1,7 @@
 <?php
 
 namespace controller;
-
+use MapController;
 class Router
 {
 
@@ -19,20 +19,22 @@ class Router
 
         ];
     }
-
-    public function addRoute($method, $url)
+    public function addRoute($method, $url, $nameClass)
     {
         try {
             $method = strtoupper($method);
             if (!isset($this->routes[$method])) {
                 throw new \Exception("Méthode HTTP non supportée");
             }
-            $this->routes[$method][$url] = "\\controller\\" . ucfirst($url) . "Controller";
+        
+            $nameClass = "\\controller\\".$nameClass;
+            $this->routes[$method][$url] = $nameClass;
         } catch (\Exception $e) {
 
             http_response_code(405);
             echo "Une erreur est survenue. Veuillez réessayer plus tard. L'erreur est la suivante : " . $e->getMessage();
         }
+        
     }
 
     private function chooseRoad($method, $route, $param)
