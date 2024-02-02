@@ -6,45 +6,32 @@ use model\MapCRUD;
 
 class MapController
 {
-    public function methodRoad($method, $param)
+
+    public function handleRequest($method, $param)
     {
-        switch ($method) {
-            case "GET":
-                if (!empty($param)) {
-                    $this->getMethodParam($param);
+        try {
+            if (!empty($param)) {
+                $roadMethodParam = strtolower($method) . "MethodParam";
+                if (method_exists($this, $roadMethodParam)) {
+                    $this->$roadMethodParam($param);
                 } else {
-                    $this->getMethod();
+                    throw new \Exception("La méthode spécifiée n'existe pas");
                 }
-                break;
-            case "POST":
-                if (!empty($param)) {
-                    $this->postMethodParam($param);
+            } else {
+                $roadMethod = strtolower($method) . "Method";
+                if (method_exists($this, $roadMethod)) {
+                    $this->$roadMethod();
                 } else {
-                    $this->postMethod();
+                    throw new \Exception("La méthode spécifiée n'existe pas");
                 }
-                break;
-            case "PUT":
-                if (!empty($param)) {
-                    $this->putMethodParam($param);
-                } else {
-                    $this->putMethod();
-                }
-                break;
-            case "DELETE":
-                if (!empty($param)) {
-                    $this->deleteMethodParam($param);
-                } else {
-                    $this->deleteMethod();
-                }
-                break;
-            default:
-                // on ne gère pas cette requête donc renvoie le code HTTP 405 (Method Not Allowed)
-                http_response_code(405);
-                // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-                throw new \Exception("Invalid request method");
-                exit();
+            }
+        } catch (\Exception $e) {
+
+            http_response_code(405);
+            echo "Une erreur est survenue. Veuillez réessayer plus tard. L'erreur est la suivante : " . $e->getMessage();
         }
     }
+
 
 
     public function getMethodParam($id)
@@ -61,55 +48,5 @@ class MapController
         // Envoi du fichier Json
         header("Content-Type: application/json");
         echo $json;
-    }
-
-    public function getMethod()
-    {
-        http_response_code(405);
-        // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-        throw new \Exception("Invalid request method");
-        exit();
-    }
-    public function postMethodParam($param)
-    {
-        http_response_code(405);
-        // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-        throw new \Exception("Invalid request method");
-        exit();
-    }
-    public function postMethod()
-    {
-        http_response_code(405);
-        // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-        throw new \Exception("Invalid request method");
-        exit();
-    }
-    public function putMethodParam($param)
-    {
-        http_response_code(405);
-        // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-        throw new \Exception("Invalid request method");
-        exit();
-    }
-    public function putMethod()
-    {
-        http_response_code(405);
-        // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-        throw new \Exception("Invalid request method");
-        exit();
-    }
-    public function deleteMethodParam($param)
-    {
-        http_response_code(405);
-        // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-        throw new \Exception("Invalid request method");
-        exit();
-    }
-    public function deleteMethod()
-    {
-        http_response_code(405);
-        // pour le debug on lance une exception mais ça pourrait aussi être un die() ou exit()
-        throw new \Exception("Invalid request method");
-        exit();
     }
 }

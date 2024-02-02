@@ -18,3 +18,5 @@ $router->addRoute("GET", "map");
 
 // On démarre l'application
 $router->delegate();
+
+
