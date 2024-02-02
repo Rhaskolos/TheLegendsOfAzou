@@ -1,6 +1,9 @@
 <?php
 
-function loaderEnv($file)
+
+class LoaderEnv {
+
+    static function  loadEnv($file)
 {
 
     if (file_exists($file)) {
@@ -17,17 +20,7 @@ function loaderEnv($file)
             putenv(trim($line));
         }
     } else {
-        throw new Exception("Error, file not found.");
+        var_dump("Error, file not found.");
     }
 }
-
-
-/*
-for loading .env file : 
-
-loaderEnv(".env");
-
-for save value of .env : 
-
-$save = getenv($value)
-*/
+}

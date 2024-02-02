@@ -1,20 +1,21 @@
 <?php
 
-namespace model;
 
 class DB extends \PDO
 {
     private static $_instance;
     protected int $transactionCounter = 0;
+    
+    
 
     private function __construct()
     {
-        // TODO: switch to .env file
-        $host     = "127.0.0.1";     // getenv('DB_HOST');
-        $username = "root";          // getenv('DB_USERNAME');
-        $password = "";              // getenv('DB_PASSWORD');
-        $database = "legendsofazou"; // getenv('DB_NAME');
-
+        // récuperation des variables d'environnements
+        $host = getenv('DB_HOST');
+        $username = getenv('DB_USERNAME');
+        $password = getenv('DB_PASSWORD');
+        $database = getenv('DB_NAME');
+      
         try {
             $options = [
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
@@ -65,3 +66,4 @@ class DB extends \PDO
 
 
 }
+

@@ -2,7 +2,8 @@
 
 namespace model;
 
-use IEntityDAO;
+use DB;
+use model\EntityDAO;
 
 class EntityCRUD {
 

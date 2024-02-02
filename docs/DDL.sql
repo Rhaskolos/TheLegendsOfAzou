@@ -8,7 +8,7 @@ CREATE TABLE player(
 
 CREATE TABLE map(
    id_map INT AUTO_INCREMENT,
-   heigth_map INT,
+   height_map INT,
    width_map INT,
    name_map VARCHAR(255) ,
    desc_map TEXT,
@@ -66,9 +66,9 @@ CREATE TABLE item(
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill)
 );
 
-CREATE TABLE monster(
+CREATE TABLE mob(
    id_entity INT,
-   move_pattern_monster VARCHAR(255)  NOT NULL,
+   move_pattern_mob VARCHAR(255)  NOT NULL,
    PRIMARY KEY(id_entity),
    FOREIGN KEY(id_entity) REFERENCES entity(id_entity)
 );

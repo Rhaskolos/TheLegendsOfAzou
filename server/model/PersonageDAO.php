@@ -13,6 +13,18 @@ class PersonageDAO extends EntityDAO {
     parent::__construct();
   }
 
+  public function toArray() 
+    {
+       return [
+            "type" => $this->getType(),
+            "x" => $this->getX(),
+            "y" => $this->getY(),
+            "orientation" => $this->getOrientation(),
+ 
+
+        ];
+    }
+    
   /**
    * Get the value of special
    */ 
