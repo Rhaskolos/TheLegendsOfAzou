@@ -37,6 +37,25 @@ class EntityDAO {
   public function __construct()
   {}
 
+  public function updateSetterEntity($dataEntity)
+  {
+    return $this
+    ->setId($dataEntity["id_entity"])
+    ->setType($dataEntity["type_entity"])
+    ->setX($dataEntity["x_entity"])
+    ->setY($dataEntity["y_entity"])
+    ->setHealth($dataEntity["health_entity"])
+    ->setMoveSpeed($dataEntity["move_speed_entity"])
+    ->setAttackSpeed($dataEntity["atk_speed_entity"])
+    ->setAttackRange($dataEntity["atk_range_entity"])
+    ->setPhysicAttack($dataEntity["atk_physic_entity"])
+    ->setMagicAttack($dataEntity["atk_magic_entity"])
+    ->setPhysicDefense($dataEntity["def_physic_entity"])
+    ->setMagicDefense($dataEntity["def_magic_entity"])
+    ->setOrientation($dataEntity["orientation_entity"])
+    ->setSkill($dataEntity["id_skill"]);
+  }
+
   /**
    * Get the value of skill
    */ 

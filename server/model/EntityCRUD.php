@@ -7,6 +7,8 @@ use model\EntityDAO;
 
 class EntityCRUD {
 
+  
+
   public static function create(EntityDAO $entity): bool
   {
     $db = DB::getInstance();
