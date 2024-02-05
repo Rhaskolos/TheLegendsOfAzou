@@ -16,18 +16,37 @@ $mapWidth  = $jsonData["width"];
 $mapTiles    = [];
 $mapEntities = [];
 
-function parseTiles($data){
+function parseTiles($data,$calcType){
   global $mapTiles;
   global $mapWidth;
-  foreach ($data as $i => $tiledId){
+
+    if ($calcType = "Tile") 
+    {
+    foreach ($data as $i => $tiledId){
     $x = $i % $mapWidth;
     $y = floor($i / $mapWidth);
-    //TODO: type is to be determined $type = $tiledId - 1;
-    $fileId = "tile_" . str_pad($tiledId - 1, 4, '0', STR_PAD_LEFT) . ".png";
-    echo "Tile (x: $x, y: $y) -> $fileId<br>";
-    $mapTiles[] = [ "x" => $x, "y" => $y ];
+    $type = $tiledId;
+    }    
+    return $mapTiles;
+
+    } else if ($calcType = "Entity") 
+    {
+    foreach ($data as $i => $tiledId){
+    
+    if($tiledId != 0){
+    $x = $i % $mapWidth;
+    $y = floor($i / $mapWidth);
+    $type = $tiledId;
+    }
+    }    
+    return $mapTiles;
+
+    } else 
+    {
+        throw new \Exception(" (calcType) doit soit être (Tile) soit (Entity)"); 
+    }
   }
-}
+
 
 
 foreach ($jsonData["layers"] as $layer){

@@ -50,7 +50,7 @@ CREATE TABLE tile(
    type_tile INT NOT NULL,
    x_tile INT NOT NULL,
    y_tile INT NOT NULL,
-   id_skill INT NOT NULL,
+   id_skill INT,
    id_map INT NOT NULL,
    PRIMARY KEY(id_tile),
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill),
@@ -61,7 +61,7 @@ CREATE TABLE item(
    id_item INT AUTO_INCREMENT,
    name_item VARCHAR(255)  NOT NULL,
    desc_item TEXT NOT NULL,
-   id_skill INT NOT NULL,
+   id_skill INT,
    PRIMARY KEY(id_item),
    FOREIGN KEY(id_skill) REFERENCES skill(id_skill)
 );
@@ -91,14 +91,4 @@ CREATE TABLE inventory(
    PRIMARY KEY(id_entity, id_item),
    FOREIGN KEY(id_entity) REFERENCES entity(id_entity),
    FOREIGN KEY(id_item) REFERENCES item(id_item)
-);
-
-CREATE TABLE inventory(
-  id_entity INT,
-  id_item INT,
-  slot_inventory INT NOT NULL,
-  count_item INT NOT NULL,
-  PRIMARY KEY(id_entity, id_item),
-  FOREIGN KEY(id_entity) REFERENCES entity(id_entity),
-  FOREIGN KEY(id_item) REFERENCES item(id_item)
 );
