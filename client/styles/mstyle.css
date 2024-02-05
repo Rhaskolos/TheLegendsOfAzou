@@ -3,7 +3,7 @@
 body {
     font-family: Cinzel, sans-serif;
     font-size: 3rem;
-    background-image: url('assets/menu.png');
+    background-image: url('../assets/menu.png');
     background-size: cover;
     background-repeat: repeat;
     background-position: center;

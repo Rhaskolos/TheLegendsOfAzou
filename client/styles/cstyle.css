@@ -3,7 +3,7 @@
 body {
     font-family: 'Cinzel', sans-serif;
    /* background-color: #f4f4f4;*/
-    background-image: url('assets/contact.png');
+    background-image: url('../assets/contact.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
