@@ -11,7 +11,7 @@ use controller\HomeController;
 use controller\MapController;
 
 
-
+session_start();
 
 
 // router instantiation
