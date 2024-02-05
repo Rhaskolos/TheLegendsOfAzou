@@ -25,7 +25,7 @@ class Level extends MovableScene {
     sketch.createCanvas(1100, 800);
   }
 
-  draw() {
+  draw(sketch) {
     super.draw();
   }
   

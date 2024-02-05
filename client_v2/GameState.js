@@ -18,7 +18,7 @@ class GameState {
   }
   set scene(in_scene) {
     this._scene = in_scene;
-    this.p5Instance = new p5(this.scene.sketch, P5_NODE_ID);
+    this._p5Instance = new p5(this.scene.sketch, P5_NODE_ID);
   }
 
   get p5Instance() {
