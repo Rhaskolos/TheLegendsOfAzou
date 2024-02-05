@@ -4,6 +4,8 @@ namespace model;
 
 use Exception;
 use PDOException;
+use DB;
+use model\PlayerDAO;
 
 class PlayerCRUD {
 

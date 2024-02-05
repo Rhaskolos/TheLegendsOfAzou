@@ -17,20 +17,43 @@ class EntityDAO {
   private int $physicDefense;
   private int $magicDefense;
   private string $orientation;
-  private ?int $skill;
+  private int $map;
+  private int $skill;
 
 
   /** Because PHP is not a good language I had to use this dirty hack
    *  to cast an instance to its parent class...
    * @see https://gist.github.com/borzilleri/960035
    */
-  public static function fromPersonage(PersonageDAO $personage): EntityDAO
+  /*public static function fromPersonage(PersonageDAO $personage): EntityDAO
   {
     return unserialize(preg_replace(
       '/^O:\d+:"[^"]++"/',
       "O:15:\"model\\EntityDAO\"",
       serialize($personage)
     ));
+  }*/
+
+  public function __construct()
+  {}
+
+  public function updateSetterEntity($dataEntity)
+  {
+    return $this
+    ->setId($dataEntity["id_entity"])
+    ->setType($dataEntity["type_entity"])
+    ->setX($dataEntity["x_entity"])
+    ->setY($dataEntity["y_entity"])
+    ->setHealth($dataEntity["health_entity"])
+    ->setMoveSpeed($dataEntity["move_speed_entity"])
+    ->setAttackSpeed($dataEntity["atk_speed_entity"])
+    ->setAttackRange($dataEntity["atk_range_entity"])
+    ->setPhysicAttack($dataEntity["atk_physic_entity"])
+    ->setMagicAttack($dataEntity["atk_magic_entity"])
+    ->setPhysicDefense($dataEntity["def_physic_entity"])
+    ->setMagicDefense($dataEntity["def_magic_entity"])
+    ->setOrientation($dataEntity["orientation_entity"])
+    ->setSkill($dataEntity["id_skill"]);
   }
 
   /**
@@ -309,6 +332,27 @@ class EntityDAO {
   public function setType($type)
   {
     $this->type = $type;
+
+    return $this;
+  }
+
+
+  /**
+   * Get the value of map
+   */ 
+  public function getMap()
+  {
+    return $this->map;
+  }
+
+  /**
+   * Set the value of map
+   *
+   * @return  self
+   */ 
+  public function setMap($map)
+  {
+    $this->map = $map;
 
     return $this;
   }

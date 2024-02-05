@@ -2,7 +2,12 @@
 
 namespace model;
 
+use DB;
+use model\EntityDAO;
+
 class EntityCRUD {
+
+  
 
   public static function create(EntityDAO $entity): bool
   {
@@ -22,8 +27,9 @@ class EntityCRUD {
             def_physic_entity,
             def_magic_entity,
             orientation_entity,
+            id_map,
             id_skill
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
       $stmt->execute([
         $entity->getType(),
         $entity->getX(),
@@ -37,6 +43,7 @@ class EntityCRUD {
         $entity->getPhysicDefense(),
         $entity->getMagicDefense(),
         $entity->getOrientation(),
+        $entity->getMap(),
         $entity->getSkill(),
       ]);
       $entity->setId($db->lastInsertId());
@@ -71,6 +78,7 @@ class EntityCRUD {
       ->setPhysicDefense($row["def_physic_entity"])
       ->setMagicDefense($row["def_magic_entity"])
       ->setOrientation($row["orientation_entity"])
+      ->setMap($row["id_map"])
       ->setSkill($row["id_skill"]);
   }
 
@@ -92,6 +100,7 @@ class EntityCRUD {
             atk_magic_entity = ?,
             def_physic_entity = ?,
             def_magic_entity = ?,
+            id_map = ?,
             id_skill = ?
           WHERE id_entity = ?")
         ->execute([
@@ -106,6 +115,7 @@ class EntityCRUD {
           $entity->getPhysicDefense(),
           $entity->getMagicDefense(),
           $entity->getOrientation(),
+          $entity->getMap(),
           $entity->getSkill(),
           $entity->getId()
         ]);

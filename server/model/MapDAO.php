@@ -2,6 +2,10 @@
 
 namespace model;
 
+use model\TileCRUD;
+use model\MobCRUD;
+use model\PersonageCRUD;
+
 class MapDAO {
 
   private int    $id;
@@ -10,12 +14,23 @@ class MapDAO {
   private ?string $name;
   private ?string $desc;
   private array  $tiles = [];
+  private array  $mobs = [];
+  private        $personage;
+
+  public function updateSetterMap($dataMap)
+  {
+    return $this
+    ->setHeight($dataMap["height_map"])
+      ->setWidth($dataMap["width_map"])
+      ->setName($dataMap["name_map"])
+      ->setDesc($dataMap["desc_map"]);
+  }
 
   public function addTile($x, $y, $type)
   {
     $tile = new TileDAO();
     $tile
-      ->setX($y)
+      ->setX($x)
       ->setY($y)
       ->setType($type)
       ->setMap($this->getId());
@@ -24,6 +39,61 @@ class MapDAO {
     return $this;
   }
 
+  public function addMob($x, $y, $type)
+  {
+    $mob = new MobDAO();
+    $mob
+      ->setX($x)
+      ->setY($y)
+      ->setType($type)
+      ->setMap($this->getId());
+    MobCRUD::create($mob);
+    $this->mobs[] = $mob;
+    return $this;
+  }
+
+  public function addPersonage($x, $y, $type)
+  {
+    $personage = new PersonageDAO();
+    $personage
+      ->setX($x)
+      ->setY($y)
+      ->setType($type)
+      ->setMap($this->getId());
+    PersonageCRUD::create($personage);
+    $this->personage = $personage;
+    return $this;
+  }
+
+
+  public function toArray() 
+  {
+    $tilesArray = [];
+    foreach ($this->tiles as $tile) {
+        $tilesArray[] = $tile->toArray();
+    }
+
+    $mobsArray = [];
+    foreach ($this->mobs as $mob) {
+        $mobsArray[] = $mob->toArray();
+    }
+
+    if ($this->personage !== null) {
+        $personageArray = $this->personage->toArray();
+    } else {
+        $personageArray = null;
+    }
+    return [
+      "height" => $this->getHeight(),
+      "width" => $this->getWidth(),
+      "name" => $this->getName(),
+      "desc" => $this->getDesc(),
+      "tiles" => $tilesArray,
+      "mobs" => $mobsArray,
+      "personage" => $personageArray
+    ];
+    
+  }
   // ---8<---
 
   /**
@@ -142,6 +212,46 @@ class MapDAO {
   public function setTiles($tiles)
   {
     $this->tiles = $tiles;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of mobs
+   */ 
+  public function getMobs()
+  {
+    return $this->mobs;
+  }
+
+  /**
+   * Set the value of mobs
+   *
+   * @return  self
+   */ 
+  public function setMobs($mobs)
+  {
+    $this->mobs = $mobs;
+
+    return $this;
+  }
+
+    /**
+   * Get the value of personage
+   */ 
+  public function getPersonage()
+  {
+    return $this->personage;
+  }
+
+  /**
+   * Set the value of personage
+   *
+   * @return  self
+   */ 
+  public function setPersonage($personage)
+  {
+    $this->personage = $personage;
 
     return $this;
   }

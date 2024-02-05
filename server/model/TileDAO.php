@@ -12,6 +12,27 @@ class TileDAO {
   private int $skill = 1;
 
 
+  public function toArray() 
+  {
+     return [
+      "x" => $this->getX(),
+      "y" => $this->getY(),
+      "type" => $this->getType(),
+     ];
+    }
+  
+    public function updateSetterTile($dataTile)
+    {
+      return $this
+      ->setId($dataTile["id_tile"])
+      ->setX($dataTile["x_tile"])
+      ->setY($dataTile["y_tile"])
+      ->setType($dataTile["type_tile"]);
+    }
+
+
+
+
   /**
    * Get the value of id
    */ 

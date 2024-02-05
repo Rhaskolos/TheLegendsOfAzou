@@ -2,6 +2,9 @@
 
 namespace model;
 
+use DB;
+use model\TileDAO;
+
 class TileCRUD {
 
   public static function create (TileDAO $tile): bool {
@@ -35,11 +38,11 @@ class TileCRUD {
     $tile = new TileDAO();
     return $tile
       ->setId($id)
-      ->setX($row["x"])
-      ->setY($row["y"])
-      ->setType($row["type"])
-      ->setMap($row["map"])
-      ->setSkill($row["skill"]);
+      ->setX($row["x_tile"])
+      ->setY($row["y_tile"])
+      ->setType($row["type_tile"])
+      ->setMap($row["id_map"])
+      ->setSkill($row["id_skill"]);
   }
 
   public static function update (TileDAO $tile): bool {

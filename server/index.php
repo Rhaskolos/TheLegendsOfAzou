@@ -1,43 +1,24 @@
 <?php
 
-namespace model;
+require_once("Autoloader.php");
+require_once("LoaderEnv.php");
 
-require_once('./autoload.php');
+Autoloader::register();
 
-
-$player = new PlayerDAO();
-$player
-  ->setType(1)
-  ->setX(0)
-  ->setY(0)
-  ->setHealth(10)
-  ->setMoveSpeed(1)
-  ->setAttackSpeed(1)
-  ->setAttackRange(1)
-  ->setPhysicAttack(1)
-  ->setMagicAttack(1)
-  ->setPhysicDefense(1)
-  ->setMagicDefense(1)
-  ->setOrientation(1)
-  ->setSkill(1) // noskill
-  ->setLogin("bob")
-  ->setPassword("log");
-
-$ok = PlayerCRUD::create($player);
+use controller\Router;
 
 
-// read OK
-//$entity = EntityCRUD::read(2);
+
+LoaderEnv::loadEnv(".env");
 
 
-/* update OK
-$entity->setHealth(100);
-EntityCRUD::update($entity);
-*/
+// router instantiation
+$router = new Router();
 
-//$ok = EntityCRUD::delete($entity);
+//put here all the routes to load
+$router->addRoute("GET","map","MapController");
 
-//$entity = EntityDAO::fromPlayer($player);
+// starting the router
+$router->delegate();
 
 
-var_dump($player);
