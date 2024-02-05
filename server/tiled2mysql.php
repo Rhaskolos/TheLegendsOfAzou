@@ -21,7 +21,7 @@ function parseTiles($data){
   global $mapWidth;
   foreach ($data as $i => $tiledId){
     $x = $i % $mapWidth;
-    $y = floor($i / 25);
+    $y = floor($i / $mapWidth);
     //TODO: type is to be determined $type = $tiledId - 1;
     $fileId = "tile_" . str_pad($tiledId - 1, 4, '0', STR_PAD_LEFT) . ".png";
     echo "Tile (x: $x, y: $y) -> $fileId<br>";

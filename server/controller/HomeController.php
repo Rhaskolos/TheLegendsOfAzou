@@ -4,7 +4,7 @@ namespace controller;
 
 class HomeController implements IController {
 
-  public function handleRequest(string $method, int $param): void
+  public function handleRequest(array $params): void
   {
     echo "index ok";
   }

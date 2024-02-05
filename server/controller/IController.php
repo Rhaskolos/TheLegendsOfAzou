@@ -4,6 +4,6 @@ namespace controller;
 
 interface IController {
 
-  public function handleRequest(string $method, int $param): void;
+  public function handleRequest(array $params): void;
 
 }
