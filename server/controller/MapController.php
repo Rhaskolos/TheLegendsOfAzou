@@ -4,37 +4,35 @@ namespace controller;
 
 use model\MapCRUD;
 
-class MapController
-{
+class MapController implements IController {
 
-    public function handleRequest($method, $param)
+
+    public function handleRequest(array $params): void
     {
-        try {
-            if (!empty($param)) {
-                $roadMethodParam = strtolower($method) . "MethodParam";
-                if (method_exists($this, $roadMethodParam)) {
-                    $this->$roadMethodParam($param);
-                } else {
-                    throw new \Exception("The specified method does not exist.");
+        $method = $_SERVER["REQUEST_METHOD"];
+        switch ($method){
+            case "GET":
+                if (count($params) === 0){
+                    throw new \Exception("MapController expect one parameter to handle a GET request");
                 }
-            } else {
-                $roadMethod = strtolower($method) . "Method";
-                if (method_exists($this, $roadMethod)) {
-                    $this->$roadMethod();
-                } else {
-                    throw new \Exception("The specified method does not exist.");
+                // try to parse the first parameter as integer
+                $id = filter_var($params[0], FILTER_SANITIZE_NUMBER_INT);
+                if (!$id){
+                    http_response_code(400); // 400 Bad Request
+                    throw new \Exception("MapController invalid route parameter(s)");
                 }
-            }
-        } catch (\Exception $e) {
-
-            http_response_code(405);
-            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
+                // pass it to the GET request handling method
+                $this->handleGET((int) $id);
+                break;
+            default:
+                http_response_code(405); // 405 Method Not Allowed
+                throw new \Exception("MapController does not handle HTTP method: " . htmlentities($method));
         }
     }
 
 
 
-    public function getMethodParam($id)
+    private function handleGET(int $id): void
     {
 
         $mapDAO = MapCRUD::read($id);
@@ -45,7 +43,7 @@ class MapController
         $json = json_encode($mapArray);
 
 
-        // Sending the JSON file
+        // Send the JSON file
         header("Content-Type: application/json");
         echo $json;
     }

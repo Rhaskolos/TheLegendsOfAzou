@@ -4,19 +4,23 @@ require_once("Autoloader.php");
 require_once("LoaderEnv.php");
 
 Autoloader::register();
+LoaderEnv::loadEnv(".env");
 
 use controller\Router;
+use controller\HomeController;
+use controller\MapController;
 
 
-
-LoaderEnv::loadEnv(".env");
+session_start();
 
 
 // router instantiation
 $router = new Router();
 
 //put here all the routes to load
-$router->addRoute("GET","map","MapController");
+$router->addRoute("/", new HomeController());
+
+$router->addRoute("/map",  new MapController());
 
 // starting the router
 $router->delegate();

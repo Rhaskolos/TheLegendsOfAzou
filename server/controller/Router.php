@@ -10,96 +10,34 @@ class Router
 
     public function __construct()
     {
-        $this->routes = [
-            "GET" => [],
-            "POST" => [],
-            "PUT" => [],
-            "PATCH" => [],
-            "DELETE" => []
-
-        ];
-    }
-    public function addRoute($method, $url, $nameClass)
-    {
-        try {
-            $method = strtoupper($method);
-            if (!isset($this->routes[$method])) {
-                throw new \Exception("Not supported HTTP method");
-            }
-        
-            $nameClass = "\\controller\\".$nameClass;
-            $this->routes[$method][$url] = $nameClass;
-        } catch (\Exception $e) {
-
-            http_response_code(405);
-            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
-        }
-        
+        $this->routes = [];
     }
 
-    private function chooseRoad($method, $route, $param)
+    public function addRoute(string $route, IController $controller)
     {
-        try {
-            if (array_key_exists($route, $this->routes[$method])) {
-
-                $class = $this->routes[$method][$route];
-                $controller = new $class();
-                $controller->handleRequest($method, $param);
-            } else {
-                throw new \Exception("The recherched road does not exist");
-            }
-        } catch (\Exception $e) {
-            http_response_code(404);
-            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
-        }
+        $this->routes[$route] = $controller;
     }
 
     public function delegate()
     {
-        try {
-            $route = null;
-            $method = $_SERVER['REQUEST_METHOD'];
-
-            // Managing URL parameters
-            // p=controleur/param
-            $params = [];
-            if (isset($_GET['p']))
-                $params = explode('/', $_GET['p']);
-
-            // switch based on the number of parameters passed in the URL
-            switch (count($params)) {
-                case 1:
-                    // Only one param : It's the name of the road
-                    $route = $params[0];
-                    $param = null;
-
-                    break;
-                case 2:
-                    // Two params : It's the name of the road and one argument
-                    $route = $params[0];
-                    $param = filter_var($params[1], FILTER_SANITIZE_NUMBER_INT);
-                    break;
-                default:
-                    // for now, we do not handle routes with more than two parameters in the URL
-                    throw new \Exception('Invalid request parameters count');
-                    break;
-            }
-        } catch (\Exception $e) {
-
-            http_response_code(503);
-            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
+        // make sure we receive request parameters through apache rewrite rule
+        if (!array_key_exists("p", $_GET)){
+            http_response_code(404); // 404 Page Not Found
+            throw new \Exception("Invalid request URL: " . htmlentities($_SERVER["REQUEST_URI"]));
         }
+        // split request using slash delimiter to separate request parameters
+        $params = explode('/', $_GET['p']);
+        // first parameter is the route name, remove it from params array
+        $route = "/" . array_shift($params); // every route get prefixed with a slash
 
-        try {
-            if ($route != null) {
-                $this->chooseRoad($method, $route, $param);
-            } else {
-                throw new \Exception('Invalid Road');
-            }
-        } catch (\Exception $e) {
-
-            http_response_code(503);
-            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
+        // make sure a route is registered to handle the requested route
+        if (!array_key_exists($route, $this->routes)){
+            http_response_code(404); // 404 Not Found
+            throw new \Exception("Controller not found for route: " . htmlentities($route));
         }
+        // retrieve registered route controller
+        $controller = $this->routes[$route];
+        // delegate request & parameters handling to the controller
+        $controller->handleRequest($params);
     }
 }

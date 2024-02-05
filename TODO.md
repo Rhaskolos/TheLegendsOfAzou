@@ -7,3 +7,8 @@
 4. migrer le code PHP vers javascript frontend
 4. version test frontend avec intégration requête serveur
 X. tester le jeu
+
+
+ - route index
+ - peupler la base
+ - login/register => session
