@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+body {
+    font-family: 'Cinzel', sans-serif;
+   /* background-color: #f4f4f4;*/
+    background-image: url('../assets/contact.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.contact-form {
+    /*background: white;*/
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    width: 500px;
+}
+
+.contact-form h2 {
+    margin-top: 0;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 45px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #007bff;
+}
+
+.form-group label {
+    position: absolute;
+    top: -20px;
+    left: 15px;
+    background: white;
+    padding: 0 10px;
+    color: #666;
+    transition: top 0.3s, left 0.3s, font-size 0.3s;
+}
+
+.form-group input:focus + label, .form-group textarea:focus + label {
+    top: -35px;
+    left: 10px;
+    font-size: 12px;
+}
+
+.form-group textarea {
+    height: 150px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #28a745;
+    color: white;
+    font-family: 'Cinzel', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #218838;
+}
