@@ -5,7 +5,7 @@ class LoaderEnv {
 
     static function  loadEnv($file)
 {
-
+try {
     if (file_exists($file)) {
 
 
@@ -19,8 +19,16 @@ class LoaderEnv {
 
             putenv(trim($line));
         }
-    } else {
-        var_dump("Error, file not found.");
+
+        } else { 
+            throw new \Exception("Error, file not found.");
+    }         
+    } catch (\Exception $e) {
+        http_response_code(404);
+        echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
     }
 }
 }
+
+
+

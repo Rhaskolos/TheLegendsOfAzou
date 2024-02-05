@@ -13,11 +13,19 @@ class Autoloader
 
     static function autoload($class)
     {
+        try {
         $classPath = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
        
-        // On vérifie si le fichier existe
+        // We check if the file exists
         if(file_exists($classPath)){
             require_once $classPath;
+        } else {
+            throw new \Exception("Autoloader failed to load file");
         }
+    } catch (\Exception $e) {
+        http_response_code(404);
+        echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
+    }
+        
     }
 }

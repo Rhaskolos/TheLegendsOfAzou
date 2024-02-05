@@ -20,6 +20,15 @@ class TileDAO {
       "type" => $this->getType(),
      ];
     }
+  
+    public function updateSetterTile($dataTile)
+    {
+      return $this
+      ->setId($dataTile["id_tile"])
+      ->setX($dataTile["x_tile"])
+      ->setY($dataTile["y_tile"])
+      ->setType($dataTile["type_tile"]);
+    }
 
 
 

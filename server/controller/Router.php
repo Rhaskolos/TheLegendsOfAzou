@@ -24,7 +24,7 @@ class Router
         try {
             $method = strtoupper($method);
             if (!isset($this->routes[$method])) {
-                throw new \Exception("Méthode HTTP non supportée");
+                throw new \Exception("Not supported HTTP method");
             }
         
             $nameClass = "\\controller\\".$nameClass;
@@ -32,7 +32,7 @@ class Router
         } catch (\Exception $e) {
 
             http_response_code(405);
-            echo "Une erreur est survenue. Veuillez réessayer plus tard. L'erreur est la suivante : " . $e->getMessage();
+            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
         }
         
     }
@@ -46,11 +46,11 @@ class Router
                 $controller = new $class();
                 $controller->handleRequest($method, $param);
             } else {
-                throw new \Exception("la route recherchée n'existe pas ");
+                throw new \Exception("The recherched road does not exist");
             }
         } catch (\Exception $e) {
             http_response_code(404);
-            echo "Une erreur est survenue. Veuillez réessayer plus tard. L'erreur est la suivante : " . $e->getMessage();
+            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
         }
     }
 
@@ -60,46 +60,46 @@ class Router
             $route = null;
             $method = $_SERVER['REQUEST_METHOD'];
 
-            // On gère les paramètres d'URL
-            // p=controleur/paramètre
+            // Managing URL parameters
+            // p=controleur/param
             $params = [];
             if (isset($_GET['p']))
                 $params = explode('/', $_GET['p']);
 
-            // switch en fonction du nombre de paramètres passés dans l'URL
+            // switch based on the number of parameters passed in the URL
             switch (count($params)) {
                 case 1:
-                    // un seul paramètre c'est le nom de la route
+                    // Only one param : It's the name of the road
                     $route = $params[0];
                     $param = null;
 
                     break;
                 case 2:
-                    // deux paramètres c'est le nom de la route et un argument
+                    // Two params : It's the name of the road and one argument
                     $route = $params[0];
                     $param = filter_var($params[1], FILTER_SANITIZE_NUMBER_INT);
                     break;
                 default:
-                    // pour le moment on ne gère pas de routes avec plus de deux paramètres dans l'URL
+                    // for now, we do not handle routes with more than two parameters in the URL
                     throw new \Exception('Invalid request parameters count');
                     break;
             }
         } catch (\Exception $e) {
 
             http_response_code(503);
-            echo "Une erreur est survenue. Veuillez réessayer plus tard. L'erreur est la suivante : " . $e->getMessage();
+            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
         }
 
         try {
             if ($route != null) {
                 $this->chooseRoad($method, $route, $param);
             } else {
-                throw new \Exception('Route invalide');
+                throw new \Exception('Invalid Road');
             }
         } catch (\Exception $e) {
 
             http_response_code(503);
-            echo "Une erreur est survenue. Veuillez réessayer plus tard. L'erreur est la suivante : " . $e->getMessage();
+            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
         }
     }
 }

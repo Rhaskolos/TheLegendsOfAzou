@@ -17,6 +17,15 @@ class MapDAO {
   private array  $mobs = [];
   private        $personage;
 
+  public function updateSetterMap($dataMap)
+  {
+    return $this
+    ->setHeight($dataMap["height_map"])
+      ->setWidth($dataMap["width_map"])
+      ->setName($dataMap["name_map"])
+      ->setDesc($dataMap["desc_map"]);
+  }
+
   public function addTile($x, $y, $type)
   {
     $tile = new TileDAO();

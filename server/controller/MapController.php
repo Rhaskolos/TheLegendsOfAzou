@@ -15,20 +15,20 @@ class MapController
                 if (method_exists($this, $roadMethodParam)) {
                     $this->$roadMethodParam($param);
                 } else {
-                    throw new \Exception("La méthode spécifiée n'existe pas");
+                    throw new \Exception("The specified method does not exist.");
                 }
             } else {
                 $roadMethod = strtolower($method) . "Method";
                 if (method_exists($this, $roadMethod)) {
                     $this->$roadMethod();
                 } else {
-                    throw new \Exception("La méthode spécifiée n'existe pas");
+                    throw new \Exception("The specified method does not exist.");
                 }
             }
         } catch (\Exception $e) {
 
             http_response_code(405);
-            echo "Une erreur est survenue. Veuillez réessayer plus tard. L'erreur est la suivante : " . $e->getMessage();
+            echo "An error has occurred. Please try again later. The error is : " . $e->getMessage();
         }
     }
 
@@ -41,11 +41,11 @@ class MapController
 
         $mapArray = $mapDAO->toArray();
 
-        // Encoder en JSON
+        // Encode in JSON
         $json = json_encode($mapArray);
 
 
-        // Envoi du fichier Json
+        // Sending the JSON file
         header("Content-Type: application/json");
         echo $json;
     }

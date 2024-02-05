@@ -12,12 +12,13 @@ use controller\Router;
 LoaderEnv::loadEnv(".env");
 
 
-// On instancie notre routeur
+// router instantiation
 $router = new Router();
 
+//put here all the routes to load
 $router->addRoute("GET","map","MapController");
 
-// On démarre l'application
+// starting the router
 $router->delegate();
 
 
