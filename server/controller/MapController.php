@@ -4,10 +4,9 @@ namespace controller;
 
 use model\MapCRUD;
 
-class MapController
-{
+class MapController implements IController {
 
-    public function handleRequest($method, $param)
+    public function handleRequest(string $method, int $param): void
     {
         try {
             if (!empty($param)) {

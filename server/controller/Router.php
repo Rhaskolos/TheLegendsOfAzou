@@ -19,16 +19,14 @@ class Router
 
         ];
     }
-    public function addRoute($method, $url, $nameClass)
+    public function addRoute(string $method, string $url, IController $controller)
     {
         try {
             $method = strtoupper($method);
             if (!isset($this->routes[$method])) {
                 throw new \Exception("Not supported HTTP method");
             }
-        
-            $nameClass = "\\controller\\".$nameClass;
-            $this->routes[$method][$url] = $nameClass;
+            $this->routes[$method][$url] = $controller;
         } catch (\Exception $e) {
 
             http_response_code(405);
@@ -42,8 +40,7 @@ class Router
         try {
             if (array_key_exists($route, $this->routes[$method])) {
 
-                $class = $this->routes[$method][$route];
-                $controller = new $class();
+                $controller = $this->routes[$method][$route];
                 $controller->handleRequest($method, $param);
             } else {
                 throw new \Exception("The recherched road does not exist");
